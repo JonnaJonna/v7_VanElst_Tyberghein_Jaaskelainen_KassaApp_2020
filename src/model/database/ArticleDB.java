@@ -1,0 +1,69 @@
+package model.database;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+/**
+ * @author Jonna J.
+ */
+
+public class ArticleDB {
+
+    Article article = null;
+    private ArrayList<Article> articles;
+    private File filename = new File("src/files/artikel.txt");
+
+    /**
+     * -load: reads articles from text file
+     * @return arraylist of article objects
+     */
+    public ArrayList<Article> load() {
+        try{
+            Scanner scanner = new Scanner(filename);
+            scanner.useDelimiter(",|\\n");
+            articles = new ArrayList<>();
+            try{
+                while(scanner.hasNext()){
+                    String code = scanner.next();
+                    String description = scanner.next();
+                    String group = scanner.next();
+                    String price = scanner.next();
+                    String stock = scanner.next();
+                    article = new Article(Integer.parseInt(code.trim()),description,group,
+                            Double.parseDouble(price.trim()),Integer.parseInt(stock.trim()));
+                    articles.add(article);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return articles;
+    }
+
+    /**
+     * -save: writes an arraylist of article objects to a text file
+     * @param articles
+     */
+    public void save(ArrayList<Article> articles){
+        try{
+            FileWriter fw = new FileWriter(filename);
+            articles.forEach(art-> {
+                String s = art.getArticleCode()+","+art.getDescription()+","+
+                        art.getArticleGroup()+","+art.getPrice()+","+art.getStock()+"\n";
+                try {
+                    fw.write(s);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            fw.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}

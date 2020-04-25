@@ -14,7 +14,7 @@ import javafx.scene.layout.GridPane;
 
 public class ProductOverviewPane extends GridPane {
 	//private TableView<Product> table;
-	
+	//TODO Show tableview of articles read from database and updating the stock after sales
 	
 	public ProductOverviewPane() {
 		this.setPadding(new Insets(5, 5, 5, 5));
@@ -25,7 +25,5 @@ public class ProductOverviewPane extends GridPane {
 		
 		
 	}
-	
-	
 
 }
