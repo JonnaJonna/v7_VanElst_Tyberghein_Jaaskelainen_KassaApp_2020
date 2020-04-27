@@ -1,6 +1,7 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 import model.database.ArticleDB;
 import view.KassaView;
@@ -18,7 +19,7 @@ public class KassaAppMain extends Application {
 	public static void main(String[] args) {
 		//Testing the article database
 		ArticleDB articleDB = new ArticleDB();
-		ArrayList<Article> articles;
+		ObservableList<Article> articles;
 		articles = articleDB.load();
 		articles.forEach(art-> {
 			System.out.println(art);

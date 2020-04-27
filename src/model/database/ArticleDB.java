@@ -1,5 +1,8 @@
 package model.database;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,18 +16,18 @@ import java.util.Scanner;
 public class ArticleDB {
 
     Article article = null;
-    private ArrayList<Article> articles;
+    private ObservableList<Article> articles;
     private File filename = new File("src/files/artikel.txt");
 
     /**
      * -load: reads articles from text file
      * @return arraylist of article objects
      */
-    public ArrayList<Article> load() {
+    public ObservableList<Article> load() {
         try{
             Scanner scanner = new Scanner(filename);
             scanner.useDelimiter(",|\\n");
-            articles = new ArrayList<>();
+            articles = FXCollections.observableArrayList(new ArrayList<Article>());
             try{
                 while(scanner.hasNext()){
                     String code = scanner.next();
@@ -49,7 +52,7 @@ public class ArticleDB {
      * -save: writes an arraylist of article objects to a text file
      * @param articles
      */
-    public void save(ArrayList<Article> articles){
+    public void save(ObservableList<Article> articles){
         try{
             FileWriter fw = new FileWriter(filename);
             articles.forEach(art-> {
