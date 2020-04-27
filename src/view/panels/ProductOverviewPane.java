@@ -1,5 +1,6 @@
 package view.panels;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,11 +14,16 @@ import javafx.scene.layout.GridPane;
 import model.database.Article;
 import model.database.ArticleDB;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
 
 public class ProductOverviewPane extends GridPane {
 	private ArticleDB articleDB;
 	private TableView<Article> table;
-	
+
 	public ProductOverviewPane(ArticleDB articleDB) {
 		this.articleDB = articleDB;
 		this.setPadding(new Insets(5, 5, 5, 5));
@@ -26,7 +32,7 @@ public class ProductOverviewPane extends GridPane {
         
 		this.add(new Label("Products:"), 0, 0, 1, 1);
 		table = new TableView<Article>();
-		table.setItems(articleDB.load());		//TODO Sort items in list alphabetically
+		table.setItems(articleDB.load());
 		TableColumn<Article, String> colCode = new TableColumn<Article, String>("Code");
 		colCode.setMinWidth(100);
 		colCode.setCellValueFactory(new PropertyValueFactory<Article, String>("articleCode"));
@@ -44,6 +50,8 @@ public class ProductOverviewPane extends GridPane {
 		colStock.setCellValueFactory(new PropertyValueFactory<Article, String>("stock"));
 
 		table.getColumns().addAll(colCode,colDescription, colGroup, colPrice,colStock);
+		table.getSortOrder().add(colDescription);
+
 		this.getChildren().addAll(table);
 	}
 	public void refresh(){table.refresh();}
