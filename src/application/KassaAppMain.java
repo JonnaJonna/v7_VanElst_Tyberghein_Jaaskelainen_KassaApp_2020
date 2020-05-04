@@ -3,11 +3,10 @@ package application;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import model.database.ArticleDB;
+import model.database.TextDatabase;
 import view.KassaView;
 import view.KlantView;
-import model.database.*;
-import java.util.ArrayList;
+import model.Article;
 
 public class KassaAppMain extends Application {
 	@Override
@@ -18,13 +17,13 @@ public class KassaAppMain extends Application {
 	
 	public static void main(String[] args) {
 		//Testing the article database
-		ArticleDB articleDB = new ArticleDB();
+		TextDatabase textDatabase = new TextDatabase();
 		ObservableList<Article> articles;
-		articles = articleDB.load();
+		articles = textDatabase.load();
 		articles.forEach(art-> {
 			System.out.println(art);
 		});
-		articleDB.save(articles);
+		textDatabase.save(articles);
 		//Testing ends
 		launch(args);
 	}

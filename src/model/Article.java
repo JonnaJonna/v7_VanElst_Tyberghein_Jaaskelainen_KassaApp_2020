@@ -1,4 +1,4 @@
-package model.database;
+package model;
 
 /**
  * @author Jonna J.

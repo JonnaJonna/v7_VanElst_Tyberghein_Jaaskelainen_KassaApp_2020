@@ -1,38 +1,28 @@
 package view.panels;
 
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import model.database.Article;
-import model.database.ArticleDB;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import model.Article;
+import model.database.TextDatabase;
 
 
 public class ProductOverviewPane extends GridPane {
-	private ArticleDB articleDB;
+	private TextDatabase textDatabase;
 	private TableView<Article> table;
 
-	public ProductOverviewPane(ArticleDB articleDB) {
-		this.articleDB = articleDB;
+	public ProductOverviewPane(TextDatabase textDatabase) {
+		this.textDatabase = textDatabase;
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
         
 		this.add(new Label("Products:"), 0, 0, 1, 1);
 		table = new TableView<Article>();
-		table.setItems(articleDB.load());
+		table.setItems(textDatabase.load());
 		TableColumn<Article, String> colCode = new TableColumn<Article, String>("Code");
 		colCode.setMinWidth(100);
 		colCode.setCellValueFactory(new PropertyValueFactory<Article, String>("articleCode"));

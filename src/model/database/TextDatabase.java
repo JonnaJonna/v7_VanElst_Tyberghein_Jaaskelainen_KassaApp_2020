@@ -8,12 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.Article;
 
 /**
  * @author Jonna J.
  */
 
-public class ArticleDB {
+public class TextDatabase implements ArticleDatabase {
 
     Article article = null;
     private ObservableList<Article> articles;
@@ -23,6 +24,7 @@ public class ArticleDB {
      * -load: reads articles from text file
      * @return arraylist of article objects
      */
+    @Override
     public ObservableList<Article> load() {
         try{
             Scanner scanner = new Scanner(filename);
@@ -52,6 +54,7 @@ public class ArticleDB {
      * -save: writes an arraylist of article objects to a text file
      * @param articles
      */
+    @Override
     public void save(ObservableList<Article> articles){
         try{
             FileWriter fw = new FileWriter(filename);

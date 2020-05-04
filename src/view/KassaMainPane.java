@@ -4,15 +4,15 @@ package view;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import model.database.ArticleDB;
+import model.database.TextDatabase;
 import view.panels.ProductOverviewPane;
 
 public class KassaMainPane extends BorderPane {
 	public KassaMainPane(){
-        ArticleDB articleDB = new ArticleDB();
+        TextDatabase textDatabase = new TextDatabase();
 	    TabPane tabPane = new TabPane(); 	    
         Tab kassaTab = new Tab("Kassa");
-        ProductOverviewPane productOverviewPane = new ProductOverviewPane(articleDB);
+        ProductOverviewPane productOverviewPane = new ProductOverviewPane(textDatabase);
         Tab artikelTab = new Tab("Artikelen",productOverviewPane);
         Tab instellingTab = new Tab("Instellingen");
         Tab logTab = new Tab("Log");
