@@ -1,19 +1,15 @@
 package view;
 
-
-import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import model.Article;
 import model.LoadSaveContext;
 import model.LoadSaveFactory;
 import model.database.LoadSaveStrategy;
-import model.database.TextLoadSaveStrategy;
 import view.panels.ProductOverviewPane;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.Properties;
 
 public class KassaMainPane extends BorderPane {
     private LoadSaveContext loadSaveContext;
@@ -31,11 +27,18 @@ public class KassaMainPane extends BorderPane {
         tabPane.getTabs().add(logTab);
 	    this.setCenter(tabPane);
 	}
-	private LoadSaveContext getLoadSaveContext(){
-        loadSaveContext = new LoadSaveContext();
-        //this still needs to be fetched from the properties (properties class)
-        LoadSaveStrategy loadSaveStrategy = LoadSaveFactory.createLoadSaveStrategy("TEXT");
-        loadSaveContext.setStrategy(loadSaveStrategy);
+	private LoadSaveContext getLoadSaveContext() {
+        Properties properties = new Properties();
+        try(InputStream fis = new FileInputStream("src/files/config.properties")){
+            properties.load(fis);
+            loadSaveContext = new LoadSaveContext();
+            //get strategy from properties file
+            LoadSaveStrategy loadSaveStrategy = LoadSaveFactory.createLoadSaveStrategy(properties.getProperty("strategy"));
+            loadSaveContext.setStrategy(loadSaveStrategy);
+            fis.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return loadSaveContext;
     }
 }
