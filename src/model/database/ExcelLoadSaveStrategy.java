@@ -9,6 +9,17 @@ import java.util.ArrayList;
  */
 
 public class ExcelLoadSaveStrategy implements LoadSaveStrategy {
+    private static ExcelLoadSaveStrategy uniqueInstance;
+
+    private ExcelLoadSaveStrategy(){}
+
+    public static ExcelLoadSaveStrategy getInstance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new ExcelLoadSaveStrategy();
+        }
+        return uniqueInstance;
+    }
+
     @Override
     public ObservableList<Article> load() {
         //This is just for testing that choosing strategy works, removed when starting to work with excelplugin

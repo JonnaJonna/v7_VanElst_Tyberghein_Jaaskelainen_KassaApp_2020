@@ -16,9 +16,20 @@ import model.Article;
 
 public class TextLoadSaveStrategy implements LoadSaveStrategy {
 
+    private static TextLoadSaveStrategy uniqueInstance;
+
     Article article = null;
     private ObservableList<Article> articles;
     private File filename = new File("src/files/artikel.txt");
+
+    private TextLoadSaveStrategy(){}
+
+    public static TextLoadSaveStrategy getInstance(){
+        if(uniqueInstance == null){
+            uniqueInstance = new TextLoadSaveStrategy();
+        }
+        return uniqueInstance;
+    }
 
     /**
      * -load: reads articles from text file
