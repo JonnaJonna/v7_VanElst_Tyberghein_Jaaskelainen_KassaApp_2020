@@ -2,7 +2,7 @@ package model.database;
 import javafx.collections.ObservableList;
 import model.Article;
 
-public class ExcelDatabase implements ArticleDatabase{
+public class ExcelLoadSaveStrategy implements LoadSaveStrategy {
     @Override
     public ObservableList<Article> load() {
         return null;

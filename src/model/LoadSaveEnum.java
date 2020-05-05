@@ -3,14 +3,14 @@ package model;
 /**
  * @author Jonna J.
  */
-public enum DBEnum {
-    TEXT("Text", "model.database.TextDatabase"),
-    EXCEL("Excel", "model.database.ExcelDatabase");
+public enum LoadSaveEnum {
+    TEXT("Text", "model.database.TextLoadSaveStrategy"),
+    EXCEL("Excel", "model.database.ExcelLoadSaveStrategy");
 
     private final String databaseName;
     private final String className;
 
-    DBEnum(String databaseName, String className) {
+    LoadSaveEnum(String databaseName, String className) {
         this.databaseName = databaseName;
         this.className = className;
     }

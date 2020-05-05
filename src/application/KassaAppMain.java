@@ -3,7 +3,7 @@ package application;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.stage.Stage;
-import model.database.TextDatabase;
+import model.database.TextLoadSaveStrategy;
 import view.KassaView;
 import view.KlantView;
 import model.Article;
@@ -17,13 +17,13 @@ public class KassaAppMain extends Application {
 	
 	public static void main(String[] args) {
 		//Testing the article database
-		TextDatabase textDatabase = new TextDatabase();
+		TextLoadSaveStrategy textLoadSaveStrategy = new TextLoadSaveStrategy();
 		ObservableList<Article> articles;
-		articles = textDatabase.load();
+		articles = textLoadSaveStrategy.load();
 		articles.forEach(art-> {
 			System.out.println(art);
 		});
-		textDatabase.save(articles);
+		textLoadSaveStrategy.save(articles);
 		//Testing ends
 		launch(args);
 	}

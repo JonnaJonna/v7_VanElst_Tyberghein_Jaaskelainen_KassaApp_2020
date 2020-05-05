@@ -14,7 +14,7 @@ import model.Article;
  * @author Jonna J.
  */
 
-public class TextDatabase implements ArticleDatabase {
+public class TextLoadSaveStrategy implements LoadSaveStrategy {
 
     Article article = null;
     private ObservableList<Article> articles;
