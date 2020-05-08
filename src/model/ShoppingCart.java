@@ -33,6 +33,14 @@ public class ShoppingCart implements Observable {
         }
     }
 
+    public double getTotalPrice() {
+        double price = 0;
+        for (Article article : contents) {
+            price += article.getPrice();
+        }
+        return price;
+    }
+
     public void addListener(ShoppingCartListener listener) {
         cartListeners.add(listener);
     }
@@ -50,4 +58,5 @@ public class ShoppingCart implements Observable {
     public void removeListener(InvalidationListener listener) {
         listeners.remove(listener);
     }
+
 }

@@ -51,5 +51,8 @@ public class ShoppingCartPane extends GridPane {
 
         Label bedrag = new Label("0");
         this.add(bedrag, 0, 2);
+
+        ObserverTotalPrice observerTotalPrice = new ObserverTotalPrice(bedrag);
+        shoppingCartController.registerObserver(observerTotalPrice);
     }
 }
