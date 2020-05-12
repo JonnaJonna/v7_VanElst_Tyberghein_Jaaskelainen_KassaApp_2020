@@ -7,6 +7,7 @@ import model.LoadSaveContext;
 import model.LoadSaveFactory;
 import model.database.LoadSaveStrategy;
 import view.panels.ProductOverviewPane;
+import view.panels.SettingsPane;
 import view.panels.ShoppingCartPane;
 
 import java.io.*;
@@ -21,7 +22,8 @@ public class KassaMainPane extends BorderPane {
         Tab kassaTab = new Tab("Kassa", shoppingCartPane);
         ProductOverviewPane productOverviewPane = new ProductOverviewPane(this.getLoadSaveContext());
         Tab artikelTab = new Tab("Artikelen",productOverviewPane);
-        Tab instellingTab = new Tab("Instellingen");
+        SettingsPane settingsPane = new SettingsPane(this.getLoadSaveContext());
+        Tab instellingTab = new Tab("Instellingen", settingsPane);
         Tab logTab = new Tab("Log");
         tabPane.getTabs().add(kassaTab);
         tabPane.getTabs().add(artikelTab);

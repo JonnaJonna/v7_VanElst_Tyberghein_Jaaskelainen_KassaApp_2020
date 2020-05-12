@@ -10,18 +10,18 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../ExcelPlugin.jar!/" />
+          <root url="jar://$MODULE_DIR$/../jar files/ExcelPlugin.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$MODULE_DIR$/../ExcelPlugin.jar!/" />
+          <root url="jar://$MODULE_DIR$/../jar files/ExcelPlugin.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../jxl-2.6.12.jar!/" />
+          <root url="jar://$MODULE_DIR$/../jar files/jxl-2.6.12.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

@@ -4,11 +4,10 @@ import controller.ShoppingCartController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import model.Article;
 import model.LoadSaveContext;
@@ -33,6 +32,7 @@ public class ShoppingCartPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 shoppingCartController.addArticle(code.getText());
+                code.setText("");
             }
         });
         this.add(code, 0, 0);
@@ -49,8 +49,10 @@ public class ShoppingCartPane extends GridPane {
 
         cartView.getColumns().addAll(colDescription, colPrice);
 
+        Label info = new Label("De huidige prijs is: €");
         Label bedrag = new Label("0");
-        this.add(bedrag, 0, 2);
+        this.add(info, 0, 2);
+        this.add(bedrag, 1, 2);
 
         ObserverTotalPrice observerTotalPrice = new ObserverTotalPrice(bedrag);
         shoppingCartController.registerObserver(observerTotalPrice);

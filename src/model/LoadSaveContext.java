@@ -23,7 +23,7 @@ public class LoadSaveContext {
         strategy.save(articles);
     }
 
-    public List<String> getStrategyList(){
+    public static List<String> getStrategyList(){
         List<String> list = new ArrayList<>();
         for(LoadSaveEnum strategy:LoadSaveEnum.values()){
             list.add(strategy.toString());
