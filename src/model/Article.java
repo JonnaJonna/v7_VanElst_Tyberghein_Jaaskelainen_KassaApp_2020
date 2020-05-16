@@ -1,5 +1,9 @@
 package model;
 
+import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 /**
  * @author Jonna J.
  */
@@ -9,7 +13,9 @@ public class Article {
     private String description;
     private String articleGroup;
     private double price;
-    private int stock;
+
+    // Amount in storage or amount in shopping cart
+    private IntegerProperty stock = new SimpleIntegerProperty();
 
     public Article(int _articleCode, String _description, String _articleGroup, double _price, int _stock){
         setArticleCode(_articleCode);
@@ -19,12 +25,16 @@ public class Article {
         setStock(_stock);
     }
 
-    public int getStock() {
+    public IntegerProperty getStock() {
         return stock;
     }
 
     public void setStock(int stock) {
-        this.stock = stock;
+        this.stock.set(stock);
+    }
+
+    public Observable getStockObservable() {
+        return stock;
     }
 
     public int getArticleCode() {
@@ -58,6 +68,10 @@ public class Article {
         this.price = price;
     }
 
+    public Article copy() {
+        return new Article(articleCode, description, articleGroup, price, stock.get());
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -65,7 +79,8 @@ public class Article {
                 ", description='" + description + '\'' +
                 ", articleGroup='" + articleGroup + '\'' +
                 ", price=" + price +
-                ", stock=" + stock +
+                ", stock=" + stock.get() +
                 '}';
     }
+
 }

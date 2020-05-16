@@ -2,8 +2,13 @@ package model;
 
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +19,25 @@ import java.util.List;
 
 public class ShoppingCart implements Observable {
 
-    private ObservableList<Article> contents = FXCollections.observableArrayList(new ArrayList<Article>());
+    private ObservableList<Article> contents = FXCollections.observableArrayList(new Callback<Article, Observable[]>() {
+        @Override
+        public Observable[] call(Article param) {
+            return new Observable[]{param.getStockObservable()};
+        }
+    });
     private List<InvalidationListener> listeners = new ArrayList<>();
     private List<ShoppingCartListener> cartListeners = new ArrayList<>();
 
     public void addArticle(Article article) {
+        // Look if the article is already in the shopping cart
+        for (Article content : contents) {
+            if (content.getArticleCode() == article.getArticleCode()) {
+                content.setStock(content.getStock().get() + article.getStock().get());
+                fireListeners();
+                return;
+            }
+        }
+
         contents.add(article);
         fireListeners();
     }
@@ -36,7 +55,7 @@ public class ShoppingCart implements Observable {
     public double getTotalPrice() {
         double price = 0;
         for (Article article : contents) {
-            price += article.getPrice();
+            price += article.getPrice() * article.getStock().get();
         }
         return price;
     }

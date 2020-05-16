@@ -34,7 +34,9 @@ public class ShoppingCartController {
         ObservableList<Article> articles = context.load();
         for (Article article : articles) {
             if (code == article.getArticleCode()) {
-                cart.addArticle(article);
+                Article copy = article.copy();
+                copy.setStock(1);
+                cart.addArticle(copy);
                 return;
             }
         }
