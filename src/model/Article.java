@@ -1,11 +1,10 @@
 package model;
 
-import javafx.beans.Observable;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 /**
- * @author Jonna J.
+ * @author Jonna J. and Ruben T
  */
 
 public class Article {
@@ -25,17 +24,16 @@ public class Article {
         setStock(_stock);
     }
 
-    public IntegerProperty getStock() {
-        return stock;
+    public int getStock() {
+        return stock.get();
     }
 
     public void setStock(int stock) {
         this.stock.set(stock);
     }
 
-    public Observable getStockObservable() {
-        return stock;
-    }
+    // Used to get the property by the ListView
+    public IntegerProperty stockProperty() { return stock; }
 
     public int getArticleCode() {
         return articleCode;

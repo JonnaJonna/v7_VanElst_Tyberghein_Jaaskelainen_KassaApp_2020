@@ -22,7 +22,7 @@ public class ShoppingCart implements Observable {
     private ObservableList<Article> contents = FXCollections.observableArrayList(new Callback<Article, Observable[]>() {
         @Override
         public Observable[] call(Article param) {
-            return new Observable[]{param.getStockObservable()};
+            return new Observable[]{param.stockProperty()};
         }
     });
     private List<InvalidationListener> listeners = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ShoppingCart implements Observable {
         // Look if the article is already in the shopping cart
         for (Article content : contents) {
             if (content.getArticleCode() == article.getArticleCode()) {
-                content.setStock(content.getStock().get() + article.getStock().get());
+                content.setStock(content.getStock() + article.getStock());
                 fireListeners();
                 return;
             }
@@ -55,7 +55,7 @@ public class ShoppingCart implements Observable {
     public double getTotalPrice() {
         double price = 0;
         for (Article article : contents) {
-            price += article.getPrice() * article.getStock().get();
+            price += article.getPrice() * article.getStock();
         }
         return price;
     }

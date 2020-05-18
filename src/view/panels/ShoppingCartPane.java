@@ -46,9 +46,9 @@ public class ShoppingCartPane extends GridPane {
         TableColumn<Article, String> colPrice = new TableColumn<Article, String>("Price");
         colPrice.setMinWidth(100);
         colPrice.setCellValueFactory(new PropertyValueFactory<Article, String>("price"));
-        TableColumn<Article, String> colAantal = new TableColumn<Article, String>("Aantal");
+        TableColumn<Article, Integer> colAantal = new TableColumn<Article, Integer>("Aantal");
         colAantal.setMinWidth(100);
-        colAantal.setCellValueFactory(new PropertyValueFactory<Article, String>("stock"));
+        colAantal.setCellValueFactory(new PropertyValueFactory<Article, Integer>("stock"));
 
         cartView.getColumns().addAll(colDescription, colPrice, colAantal);
 
