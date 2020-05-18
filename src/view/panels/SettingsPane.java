@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.GridPane;
 import model.LoadSaveContext;
+import model.Shop;
 
 /**
  * @author Wouter V E
@@ -13,10 +14,7 @@ import model.LoadSaveContext;
 
 public class SettingsPane extends GridPane {
 
-    private LoadSaveContext loadSaveContext;
-
-    public SettingsPane(LoadSaveContext context) {
-        this.loadSaveContext = context;
+    public SettingsPane(Shop shop) {
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
