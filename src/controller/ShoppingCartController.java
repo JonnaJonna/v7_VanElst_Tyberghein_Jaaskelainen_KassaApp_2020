@@ -40,6 +40,9 @@ public class ShoppingCartController {
                 return;
             }
         }
+    }
 
+    public boolean removeArticle(Article article){
+        return cart.removeArticle(article);
     }
 }

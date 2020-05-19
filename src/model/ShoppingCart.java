@@ -42,6 +42,20 @@ public class ShoppingCart implements Observable {
         fireListeners();
     }
 
+    public boolean removeArticle(Article articleSearch){
+        for (Article article : contents) {
+            if (article.getArticleCode() == articleSearch.getArticleCode()){
+                article.setStock(article.getStock()-1);
+                if (article.getStock()==0){
+                    contents.remove(article);
+                }
+                fireListeners();
+                return true;
+            }
+        }
+        return false;
+    }
+
     public ObservableList<Article> getContents() {
         return contents;
     }
