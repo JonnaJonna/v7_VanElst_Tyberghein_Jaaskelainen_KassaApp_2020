@@ -11,6 +11,10 @@ public class LoadSaveContext {
 
     public LoadSaveContext(){}
 
+    public LoadSaveStrategy getStrategy(){
+        return this.strategy;
+    }
+
     public void setStrategy(LoadSaveStrategy strategy){
         this.strategy = strategy;
     }
