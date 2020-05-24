@@ -18,7 +18,7 @@ import static model.LoadSaveContext.getStrategyList;
  * @author Wouter V E
  * @author Jonna J.
  */
-
+//tab3 of kassaview
 public class SettingsPane extends GridPane {
     ToggleGroup tg;
 

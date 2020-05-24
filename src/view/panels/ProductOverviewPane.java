@@ -8,7 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import model.Article;
 import model.Shop;
-
+//tab2 of kassaview
 public class ProductOverviewPane extends GridPane {
 	private TableView<Article> table;
 

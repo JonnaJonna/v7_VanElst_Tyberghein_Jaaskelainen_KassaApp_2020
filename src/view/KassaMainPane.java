@@ -21,7 +21,10 @@ public class KassaMainPane extends BorderPane {
 
         SettingsPane settingsPane = new SettingsPane(shop);
         Tab instellingTab = new Tab("Instellingen", settingsPane);
+
+        //LogPane logPane = new LogPane(shop);
         Tab logTab = new Tab("Log");
+
         tabPane.getTabs().add(kassaTab);
         tabPane.getTabs().add(artikelTab);
         tabPane.getTabs().add(instellingTab);

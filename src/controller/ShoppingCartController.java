@@ -29,7 +29,7 @@ public class ShoppingCartController {
         });
     }
 
-    public void addArticle(String codeString) {
+    public boolean addArticle(String codeString) {
         int code = Integer.parseInt(codeString);
         ObservableList<Article> articles = context.load();
         for (Article article : articles) {
@@ -37,9 +37,10 @@ public class ShoppingCartController {
                 Article copy = article.copy();
                 copy.setStock(1);
                 cart.addArticle(copy);
-                return;
+                return true;
             }
         }
+        return false;
     }
 
     public boolean removeArticle(Article article){

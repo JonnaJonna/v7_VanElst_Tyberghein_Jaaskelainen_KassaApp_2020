@@ -4,13 +4,16 @@ import controller.ShoppingCartController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
+import model.Article;
 
 /**
  * @author Ruben T
  */
-
+//tab1 of kassaview
 public class KassaPane extends GridPane {
 
     public KassaPane(ShoppingCartController shoppingCartController) {
@@ -19,13 +22,82 @@ public class KassaPane extends GridPane {
         this.setHgap(5);
 
         TextField code = new TextField();
+        Alert alert = new Alert(Alert.AlertType.NONE);
+
+        TableView cartView = new TableView(shoppingCartController.getCartContents());
+        this.add(cartView, 0, 1);
+
+        TableColumn<Article, String> colDescription = new TableColumn<Article, String>("Description");
+        colDescription.setMinWidth(150);
+        colDescription.setCellValueFactory(new PropertyValueFactory<Article, String>("description"));
+        TableColumn<Article, String> colPrice = new TableColumn<Article, String>("Price");
+        colPrice.setMinWidth(150);
+        colPrice.setCellValueFactory(new PropertyValueFactory<Article, String>("price"));
+        TableColumn<Article, Integer> colAantal = new TableColumn<Article, Integer>("Aantal");
+        colAantal.setMinWidth(150);
+        colAantal.setCellValueFactory(new PropertyValueFactory<Article, Integer>("stock"));
+
+        TableColumn<Article, Void> removeButton = createRemoveButton(shoppingCartController);
+
+        cartView.getColumns().addAll(colDescription, colPrice, colAantal, removeButton);
+
+        Label info = new Label("De huidige prijs is: €");
+        Label bedrag = new Label("0");
+        this.add(info, 0, 2);
+        this.add(bedrag, 1, 2);
+
+        ObserverTotalPrice observerTotalPrice = new ObserverTotalPrice(bedrag);
+        shoppingCartController.registerObserver(observerTotalPrice);
+
         code.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                shoppingCartController.addArticle(code.getText());
-                code.setText("");
+                if(!shoppingCartController.addArticle(code.getText())){
+                    alert.setAlertType(Alert.AlertType.ERROR);
+                    alert.setContentText("Non existing code!");
+                    alert.show();
+                }
+                else{
+                    //add to tableview
+                    code.setText("");
+                }
             }
         });
         this.add(code, 0, 0);
     }
+    private TableColumn<Article, Void> createRemoveButton(ShoppingCartController shoppingCartController) {
+        TableColumn<Article, Void> removeButton = new TableColumn<Article, Void>("Remove");
+        removeButton.setMinWidth(100);
+        Callback<TableColumn<Article, Void>, TableCell<Article, Void>> cellFactory = new Callback<TableColumn<Article, Void>, TableCell<Article, Void>>() {
+            @Override
+            public TableCell<Article, Void> call(final TableColumn<Article, Void> param) {
+                final TableCell<Article, Void> cell = new TableCell<Article, Void>() {
+
+                    private final Button btn = new Button("Remove");
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            Article article = getTableView().getItems().get(getIndex());
+                            shoppingCartController.removeArticle(article);
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        removeButton.setCellFactory(cellFactory);
+        return removeButton;
+    }
+
 }
