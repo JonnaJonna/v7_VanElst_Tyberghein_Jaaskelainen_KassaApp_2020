@@ -6,13 +6,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import model.KassaProperties;
-import model.LoadSaveContext;
 import model.Shop;
-
-import java.util.List;
-import java.util.Properties;
-
-import static model.LoadSaveContext.getStrategyList;
 
 /**
  * @author Wouter V E

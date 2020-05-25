@@ -1,6 +1,9 @@
 package model;
 
 import model.database.LoadSaveStrategy;
+import model.loadSaveStrategy.LoadSaveContext;
+import model.loadSaveStrategy.LoadSaveFactory;
+
 import java.io.*;
 import java.util.Properties;
 

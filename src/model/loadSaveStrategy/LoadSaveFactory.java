@@ -1,4 +1,4 @@
-package model;
+package model.loadSaveStrategy;
 
 import model.database.LoadSaveStrategy;
 import java.lang.reflect.Method;

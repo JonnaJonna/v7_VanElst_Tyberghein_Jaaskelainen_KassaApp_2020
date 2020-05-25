@@ -1,4 +1,7 @@
-package model;
+package model.shoppingCart;
+
+import model.shoppingCart.ShoppingCart;
+
 /**
  * @author Ruben T.
  */

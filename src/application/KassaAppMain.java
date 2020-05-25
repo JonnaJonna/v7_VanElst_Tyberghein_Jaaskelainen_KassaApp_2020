@@ -2,7 +2,7 @@ package application;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.LoadSaveContext;
+import model.loadSaveStrategy.LoadSaveContext;
 import model.Shop;
 import view.KassaView;
 import view.KlantView;

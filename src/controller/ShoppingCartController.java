@@ -2,9 +2,9 @@ package controller;
 
 import javafx.collections.ObservableList;
 import model.Article;
-import model.LoadSaveContext;
-import model.ShoppingCart;
-import model.ShoppingCartListener;
+import model.loadSaveStrategy.LoadSaveContext;
+import model.shoppingCart.ShoppingCart;
+import model.shoppingCart.ShoppingCartListener;
 
 /**
  * @author Ruben T.

@@ -1,6 +1,7 @@
-package model;
+package model.loadSaveStrategy;
 
 import javafx.collections.ObservableList;
+import model.Article;
 import model.database.LoadSaveStrategy;
 import java.util.ArrayList;
 import java.util.List;
