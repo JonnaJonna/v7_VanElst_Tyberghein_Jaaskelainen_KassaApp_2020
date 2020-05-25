@@ -1,9 +1,10 @@
 package model;
 
 import model.database.LoadSaveStrategy;
-
 import java.lang.reflect.Method;
-
+/**
+ * @author Jonna J.
+ */
 public class LoadSaveFactory {
     public static LoadSaveStrategy createLoadSaveStrategy(String strategyName){
         LoadSaveEnum dbEnum = LoadSaveEnum.valueOf(strategyName);

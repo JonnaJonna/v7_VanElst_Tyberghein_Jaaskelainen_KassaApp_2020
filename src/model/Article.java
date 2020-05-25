@@ -2,7 +2,6 @@ package model;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
 /**
  * @author Jonna J. and Ruben T
  */
@@ -38,6 +37,7 @@ public class Article {
     public int getArticleCode() {
         return articleCode;
     }
+
     private void setArticleCode(int articleCode) {
         this.articleCode = articleCode;
     }

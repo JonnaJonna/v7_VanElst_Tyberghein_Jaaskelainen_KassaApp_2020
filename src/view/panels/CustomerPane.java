@@ -1,12 +1,9 @@
 package view.panels;
-
-import controller.ShoppingCartController;
-import javafx.event.ActionEvent;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
-import javafx.util.Callback;
 import model.Article;
 import model.Shop;
 
@@ -15,13 +12,15 @@ import model.Shop;
  */
 
 public class CustomerPane extends GridPane {
+    protected Label info;
+    protected TableView cartView;
 
     public CustomerPane(Shop shop) {
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
 
-        TableView cartView = new TableView(shop.getShoppingCartController().getCartContents());
+        cartView = new TableView(shop.getShoppingCartController().getCartContents());
         this.add(cartView, 0, 1);
 
         TableColumn<Article, String> colDescription = new TableColumn<Article, String>("Description");
@@ -36,13 +35,12 @@ public class CustomerPane extends GridPane {
 
         cartView.getColumns().addAll(colDescription, colPrice, colAantal);
 
-        Label info = new Label("De huidige prijs is: €");
+        info = new Label("De huidige prijs is: €");
         Label bedrag = new Label("0");
         this.add(info, 0, 2);
         this.add(bedrag, 1, 2);
 
-        ObserverTotalPrice observerTotalPrice = new ObserverTotalPrice(bedrag);
-        shop.getShoppingCartController().registerObserver(observerTotalPrice);
+        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView);
+        shop.getShoppingCartController().registerObserver(observerPriceAndContents);
     }
-
 }

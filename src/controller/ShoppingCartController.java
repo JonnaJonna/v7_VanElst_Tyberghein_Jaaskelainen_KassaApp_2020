@@ -6,6 +6,9 @@ import model.LoadSaveContext;
 import model.ShoppingCart;
 import model.ShoppingCartListener;
 
+/**
+ * @author Ruben T.
+ */
 public class ShoppingCartController {
 
     private LoadSaveContext context;
@@ -20,11 +23,23 @@ public class ShoppingCartController {
         return cart.getContents();
     }
 
+    public void putCartOnHold() {
+        cart.putCartOnHold();
+    }
+
+    public ObservableList<Article> getCartFromHold() {
+        return cart.getCartFromHold();
+    }
+
+    public void clearCart() {
+        cart.clearCart();
+    }
+
     public void registerObserver(ShoppingCartObserver observer) {
         cart.addListener(new ShoppingCartListener() {
             @Override
             public void cartChanged(ShoppingCart cart) {
-                observer.update(cart.getTotalPrice());
+                observer.update(cart.getTotalPrice(), getCartContents());
             }
         });
     }

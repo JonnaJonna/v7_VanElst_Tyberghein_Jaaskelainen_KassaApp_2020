@@ -27,7 +27,9 @@ public class ShoppingCart implements Observable {
     });
     private List<InvalidationListener> listeners = new ArrayList<>();
     private List<ShoppingCartListener> cartListeners = new ArrayList<>();
+    private ObservableList<Article> cartOnHold;
 
+    //TODO, cashier needs all the items listed, only client needs to view the items listed once with updated stock
     public void addArticle(Article article) {
         // Look if the article is already in the shopping cart
         for (Article content : contents) {
@@ -58,6 +60,23 @@ public class ShoppingCart implements Observable {
 
     public ObservableList<Article> getContents() {
         return contents;
+    }
+
+    public void putCartOnHold(){
+        cartOnHold = FXCollections.observableArrayList(contents);
+        contents.clear();
+        fireListeners();
+    }
+
+    public ObservableList<Article> getCartFromHold(){
+        contents = FXCollections.observableArrayList(cartOnHold);
+        fireListeners();
+        return contents;
+    }
+
+    public void clearCart(){
+        contents.clear();
+        fireListeners();
     }
 
     private void fireListeners() {

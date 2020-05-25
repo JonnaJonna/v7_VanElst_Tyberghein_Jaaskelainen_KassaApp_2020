@@ -11,10 +11,16 @@ import javafx.util.Callback;
 import model.Article;
 
 /**
- * @author Ruben T
+ * @author Ruben T and Jonna J.
  */
 //tab1 of kassaview
 public class KassaPane extends GridPane {
+    private int soldCount = 0;
+    protected boolean holding = false;
+    protected Button holdButton;
+    protected Button activateButton;
+    protected Button paymentButton;
+    protected Button cancelButton;
 
     public KassaPane(ShoppingCartController shoppingCartController) {
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -24,6 +30,16 @@ public class KassaPane extends GridPane {
         TextField code = new TextField();
         Alert alert = new Alert(Alert.AlertType.NONE);
 
+        holdButton = new Button("HOLD");
+        activateButton = new Button("ACTIVATE");
+        paymentButton = new Button("PAYMENT");
+        cancelButton = new Button("CANCEL");
+
+        //by default the activateButton should be disabled
+        activateButton.setDisable(true);
+        activateButton.setVisible(false);
+
+        //Tableview the scanned items
         TableView cartView = new TableView(shoppingCartController.getCartContents());
         this.add(cartView, 0, 1);
 
@@ -41,14 +57,16 @@ public class KassaPane extends GridPane {
 
         cartView.getColumns().addAll(colDescription, colPrice, colAantal, removeButton);
 
+        //Total price label
         Label info = new Label("De huidige prijs is: €");
         Label bedrag = new Label("0");
         this.add(info, 0, 2);
         this.add(bedrag, 1, 2);
 
-        ObserverTotalPrice observerTotalPrice = new ObserverTotalPrice(bedrag);
-        shoppingCartController.registerObserver(observerTotalPrice);
+        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView);
+        shoppingCartController.registerObserver(observerPriceAndContents);
 
+        //Scanning items
         code.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -64,6 +82,54 @@ public class KassaPane extends GridPane {
             }
         });
         this.add(code, 0, 0);
+
+        holdButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                shoppingCartController.putCartOnHold();
+                holding = true;
+                holdActiveButtons();
+            }
+        });
+
+        activateButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                shoppingCartController.getCartFromHold();
+                holding = false;
+                holdActiveButtons();
+            }
+        });
+        //TODO handle payments
+        paymentButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                shoppingCartController.clearCart();
+                if(holding == true){
+                    if(soldCount < 2){
+                        soldCount++;
+                        System.out.println(soldCount);
+                    }
+                    else{
+                        System.out.println("Hold is cancelled!");
+                        holding = false;
+                        holdActiveButtons();
+                    }
+                } else soldCount = 0;
+            }
+        });
+
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                shoppingCartController.clearCart();
+            }
+        });
+
+        this.add(holdButton, 0, 3);
+        this.add(activateButton, 0, 3);
+        this.add(cancelButton, 1, 3);
+        this.add(paymentButton, 2, 3);
     }
     private TableColumn<Article, Void> createRemoveButton(ShoppingCartController shoppingCartController) {
         TableColumn<Article, Void> removeButton = new TableColumn<Article, Void>("Remove");
@@ -100,4 +166,19 @@ public class KassaPane extends GridPane {
         return removeButton;
     }
 
+    private void holdActiveButtons(){
+        if(holding){    //activateButton visible
+            holdButton.setDisable(true);
+            holdButton.setVisible(false);
+
+            activateButton.setDisable(false);
+            activateButton.setVisible(true);
+        } else{   //hold button visible
+            activateButton.setDisable(true);
+            activateButton.setVisible(false);
+
+            holdButton.setDisable(false);
+            holdButton.setVisible(true);
+        }
+    }
 }

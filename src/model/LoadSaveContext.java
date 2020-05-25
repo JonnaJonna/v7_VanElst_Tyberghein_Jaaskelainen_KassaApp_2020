@@ -2,10 +2,11 @@ package model;
 
 import javafx.collections.ObservableList;
 import model.database.LoadSaveStrategy;
-
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author Jonna J.
+ */
 public class LoadSaveContext {
     private LoadSaveStrategy strategy;
 

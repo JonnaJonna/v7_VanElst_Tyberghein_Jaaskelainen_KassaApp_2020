@@ -9,6 +9,9 @@ import javafx.scene.layout.GridPane;
 import model.Article;
 import model.Shop;
 //tab2 of kassaview
+/**
+ * @author Jonna J.
+ */
 public class ProductOverviewPane extends GridPane {
 	private TableView<Article> table;
 

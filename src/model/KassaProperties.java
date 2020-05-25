@@ -1,10 +1,12 @@
 package model;
 
 import model.database.LoadSaveStrategy;
-
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * @author Jonna J.
+ */
 public class KassaProperties {
     private File filename = new File("src/files/config.properties");
     private Properties properties = new Properties();
