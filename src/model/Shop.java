@@ -14,11 +14,13 @@ public class Shop {
     private ShoppingCartController shoppingCartController;
     private ObservableList<Article> articles;
     private DiscountContext discountContext;
+    private LoadSaveContext loadSaveContext;
 
     public Shop(LoadSaveContext loadSaveContext, DiscountContext discountContext) {
         shoppingCartController = new ShoppingCartController(loadSaveContext);
         articles = loadSaveContext.load();
         this.discountContext = discountContext;
+        this.loadSaveContext = loadSaveContext;
     }
 
     public ShoppingCartController getShoppingCartController() {
@@ -32,4 +34,6 @@ public class Shop {
     public DiscountContext getDiscountContext(){
         return this.discountContext;
     }
+
+    public LoadSaveContext getLoadSaveContext(){return this.loadSaveContext;}
 }

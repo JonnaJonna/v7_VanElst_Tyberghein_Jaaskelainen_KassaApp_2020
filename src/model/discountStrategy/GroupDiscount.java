@@ -10,7 +10,7 @@ public class GroupDiscount extends DiscountStrategy {
 
     public GroupDiscount(String args) {
         super(args);
-        String[] values = args.split(",");
+        String[] values = args.split("/");
         setGroupName(values[1]);
     }
 

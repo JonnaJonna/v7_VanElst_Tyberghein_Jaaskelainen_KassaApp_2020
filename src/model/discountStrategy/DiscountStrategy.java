@@ -10,7 +10,7 @@ public abstract class DiscountStrategy {
     private ObservableList<Article> shoppingCart;
 
     DiscountStrategy(String args){
-        String[] values = args.split(",");
+        String[] values = args.split("/");
         double perc = Double.parseDouble(values[0]);
         setPercentage(perc);
     }

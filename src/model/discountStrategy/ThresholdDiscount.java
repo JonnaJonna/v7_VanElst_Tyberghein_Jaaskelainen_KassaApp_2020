@@ -11,7 +11,7 @@ public class ThresholdDiscount extends DiscountStrategy {
     public ThresholdDiscount(String args) {
         super(args);
         //setThresholdValue(Double.parseDouble(thresholdValue));
-        String[] values = args.split(",");
+        String[] values = args.split("/");
         setThresholdValue(Double.parseDouble(values[1]));
     }
 

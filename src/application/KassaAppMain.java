@@ -3,9 +3,6 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.discountStrategy.DiscountContext;
-import model.discountStrategy.DiscountStrategy;
-import model.discountStrategy.GroupDiscount;
-import model.discountStrategy.ThresholdDiscount;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.Shop;
 import view.KassaView;
@@ -17,15 +14,15 @@ public class KassaAppMain extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		KassaProperties properties = new KassaProperties();	//application properties
-		LoadSaveContext loadSaveContext = properties.getLoadSaveStrategy();	//application context
-		DiscountContext discountContext = properties.getDiscountStrategy();
+		LoadSaveContext loadSaveContext = properties.getLoadSaveStrategyContext();	//application context
+		DiscountContext discountContext = properties.getDiscountStrategyContext();
 		Shop shop = new Shop(loadSaveContext, discountContext);
 		KassaView kassaView = new KassaView(shop);
 		KlantView klantView = new KlantView(shop);
 
-		/*System.out.print(discountContext.getStrategy());
+		System.out.print(discountContext.getStrategy());
 		System.out.println("\n");
-		discountContext.calculateDiscount();*/
+		discountContext.calculateDiscount();
 	}
 	public static void main(String[] args) {
 		launch(args);
