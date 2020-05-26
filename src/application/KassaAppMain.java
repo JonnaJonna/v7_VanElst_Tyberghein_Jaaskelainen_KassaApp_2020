@@ -22,7 +22,7 @@ public class KassaAppMain extends Application {
 
 		System.out.print(discountContext.getStrategy());
 		System.out.println("\n");
-		discountContext.calculateDiscount();
+		System.out.println(discountContext.getPercentage() + " " + discountContext.getStrategy());
 	}
 	public static void main(String[] args) {
 		launch(args);

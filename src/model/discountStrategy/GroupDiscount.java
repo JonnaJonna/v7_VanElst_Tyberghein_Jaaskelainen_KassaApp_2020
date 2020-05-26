@@ -1,11 +1,13 @@
 package model.discountStrategy;
 
+import javafx.collections.ObservableList;
+import model.Article;
+
 /**
  * @author Jonna J.
  * Discount calculated only for items belonging to a certain group
  */
 public class GroupDiscount extends DiscountStrategy {
-
     private String groupName;
 
     public GroupDiscount(String args) {
@@ -15,8 +17,16 @@ public class GroupDiscount extends DiscountStrategy {
     }
 
     @Override
-    public void calculateDiscount() {
-        System.out.println("Calculating group discount for " + this.getPercentage() + " group " + getGroupName());
+    public double calculateDiscount(double totalPrice, ObservableList<Article> cart) {
+        double discount = 0;
+        for (Article article : cart) {
+            if(article.getArticleGroup().equals(groupName)){
+                discount = discount + (article.getPrice() - (article.getPrice() * getPercentage()/100));
+            } else{
+                discount = discount + article.getPrice();
+            }
+        }
+        return discount;
     }
 
     public void setGroupName(String groupName){
@@ -25,10 +35,5 @@ public class GroupDiscount extends DiscountStrategy {
 
     public String getGroupName(){
         return this.groupName;
-    }
-
-    public void setValues(double percentage, String groupName){
-        setPercentage(percentage);
-        setGroupName(groupName);
     }
 }

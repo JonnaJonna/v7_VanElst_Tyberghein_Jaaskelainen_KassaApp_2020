@@ -2,6 +2,7 @@ package controller;
 
 import javafx.collections.ObservableList;
 import model.Article;
+import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
@@ -12,11 +13,14 @@ import model.shoppingCart.ShoppingCartListener;
 public class ShoppingCartController {
 
     private LoadSaveContext context;
-    private ShoppingCart cart = new ShoppingCart();
+    private DiscountContext discountContext;
+    private ShoppingCart cart;
 
 
-    public ShoppingCartController(LoadSaveContext context) {
+    public ShoppingCartController(LoadSaveContext context, DiscountContext discount) {
         this.context = context;
+        this.discountContext = discount;
+        this.cart = new ShoppingCart(discountContext);
     }
 
     public ObservableList<Article> getCartContents() {
@@ -39,7 +43,7 @@ public class ShoppingCartController {
         cart.addListener(new ShoppingCartListener() {
             @Override
             public void cartChanged(ShoppingCart cart) {
-                observer.update(cart.getTotalPrice(), getCartContents());
+                observer.update(cart.getTotalPrice(), getCartContents(), cart.getTotalAfterDiscount());
             }
         });
     }

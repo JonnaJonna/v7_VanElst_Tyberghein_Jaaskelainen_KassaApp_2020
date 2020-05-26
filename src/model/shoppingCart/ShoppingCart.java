@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import model.Article;
+import model.discountStrategy.DiscountContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +26,23 @@ public class ShoppingCart implements Observable {
     private List<InvalidationListener> listeners = new ArrayList<>();
     private List<ShoppingCartListener> cartListeners = new ArrayList<>();
     private ObservableList<Article> cartOnHold;
+    private DiscountContext discount;
+    private double totalAfterDiscount = 0;
+
+    public ShoppingCart(DiscountContext discountContext){
+        this.discount = discountContext;
+    }
 
     //TODO, cashier needs all the items listed, only client needs to view the items listed once with updated stock
     public void addArticle(Article article) {
         // Look if the article is already in the shopping cart
-        for (Article content : contents) {
+        /*for (Article content : contents) {
             if (content.getArticleCode() == article.getArticleCode()) {
                 content.setStock(content.getStock() + article.getStock());
                 fireListeners();
                 return;
             }
-        }
-
+        } */
         contents.add(article);
         fireListeners();
     }
@@ -77,6 +83,7 @@ public class ShoppingCart implements Observable {
     }
 
     private void fireListeners() {
+        calculateDiscounts();
         for (ShoppingCartListener listener : cartListeners) {
             listener.cartChanged(this);
         }
@@ -88,6 +95,14 @@ public class ShoppingCart implements Observable {
             price += article.getPrice() * article.getStock();
         }
         return price;
+    }
+
+    public double getTotalAfterDiscount(){
+        return totalAfterDiscount;
+    }
+
+    public void calculateDiscounts(){
+        this.totalAfterDiscount = discount.calculateDiscount(getTotalPrice(), contents);
     }
 
     public void addListener(ShoppingCartListener listener) {

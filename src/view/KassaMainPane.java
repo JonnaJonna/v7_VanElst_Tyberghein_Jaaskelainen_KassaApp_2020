@@ -13,7 +13,7 @@ public class KassaMainPane extends BorderPane {
 	public KassaMainPane(Shop shop){
 	    TabPane tabPane = new TabPane();
 
-        KassaPane kassaPane = new KassaPane(shop.getShoppingCartController());
+        KassaPane kassaPane = new KassaPane(shop);
         Tab kassaTab = new Tab("Kassa", kassaPane);
 
         ProductOverviewPane productOverviewPane = new ProductOverviewPane(shop);

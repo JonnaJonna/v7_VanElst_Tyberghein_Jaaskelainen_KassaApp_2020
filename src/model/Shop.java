@@ -17,7 +17,7 @@ public class Shop {
     private LoadSaveContext loadSaveContext;
 
     public Shop(LoadSaveContext loadSaveContext, DiscountContext discountContext) {
-        shoppingCartController = new ShoppingCartController(loadSaveContext);
+        shoppingCartController = new ShoppingCartController(loadSaveContext, discountContext);
         articles = loadSaveContext.load();
         this.discountContext = discountContext;
         this.loadSaveContext = loadSaveContext;

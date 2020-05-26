@@ -14,6 +14,7 @@ import model.Shop;
 public class CustomerPane extends GridPane {
     protected Label info;
     protected TableView cartView;
+    protected Label bedrag, discount, infoDiscount, infoSaved, saved;
 
     public CustomerPane(Shop shop) {
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -36,11 +37,24 @@ public class CustomerPane extends GridPane {
         cartView.getColumns().addAll(colDescription, colPrice, colAantal);
 
         info = new Label("De huidige prijs is: €");
-        Label bedrag = new Label("0");
+        bedrag = new Label("0");
+        infoSaved = new Label("You saved: € ");
+        saved = new Label("0");
+        infoDiscount = new Label("Total after discount: € ");
+        discount = new Label("0");
         this.add(info, 0, 2);
         this.add(bedrag, 1, 2);
+        this.add(infoSaved, 0, 3);
+        this.add(saved, 1, 3);
+        this.add(infoDiscount, 0, 4);
+        this.add(discount, 1, 4);
 
-        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView);
+        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView, discount,
+                saved, shop.getDiscountContext());
         shop.getShoppingCartController().registerObserver(observerPriceAndContents);
+    }
+    public void updateView(double totalPrice, ObservableList<Article> cart, double discountPrice){
+        bedrag.setText(Double.toString(totalPrice));
+        cartView.setItems(cart);
     }
 }

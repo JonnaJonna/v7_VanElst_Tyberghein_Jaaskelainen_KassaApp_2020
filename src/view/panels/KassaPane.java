@@ -1,6 +1,7 @@
 package view.panels;
 
 import controller.ShoppingCartController;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -9,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import model.Article;
+import model.Shop;
 
 /**
  * @author Ruben T and Jonna J.
@@ -17,12 +19,15 @@ import model.Article;
 public class KassaPane extends GridPane {
     private int soldCount = 0;
     protected boolean holding = false;
+    protected Label bedrag, infoDiscount, discount, infoSaved, saved;
+    protected TableView cartView;
     protected Button holdButton;
     protected Button activateButton;
     protected Button paymentButton;
     protected Button cancelButton;
 
-    public KassaPane(ShoppingCartController shoppingCartController) {
+    public KassaPane(Shop shop) {
+        ShoppingCartController shoppingCartController = shop.getShoppingCartController();
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
@@ -40,7 +45,7 @@ public class KassaPane extends GridPane {
         activateButton.setVisible(false);
 
         //Tableview the scanned items
-        TableView cartView = new TableView(shoppingCartController.getCartContents());
+        cartView = new TableView(shoppingCartController.getCartContents());
         this.add(cartView, 0, 1);
 
         TableColumn<Article, String> colDescription = new TableColumn<Article, String>("Description");
@@ -59,11 +64,20 @@ public class KassaPane extends GridPane {
 
         //Total price label
         Label info = new Label("De huidige prijs is: €");
-        Label bedrag = new Label("0");
+        bedrag = new Label("0");
+        infoSaved = new Label("You saved: € ");
+        saved = new Label("0");
+        infoDiscount = new Label("Total after discount: € ");
+        discount = new Label("0");
         this.add(info, 0, 2);
         this.add(bedrag, 1, 2);
+        this.add(infoSaved, 0, 3);
+        this.add(saved, 1, 3);
+        this.add(infoDiscount, 0, 4);
+        this.add(discount, 1, 4);
 
-        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView);
+        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView,
+                discount, saved, shop.getDiscountContext());
         shoppingCartController.registerObserver(observerPriceAndContents);
 
         //Scanning items
@@ -126,10 +140,10 @@ public class KassaPane extends GridPane {
             }
         });
 
-        this.add(holdButton, 0, 3);
-        this.add(activateButton, 0, 3);
-        this.add(cancelButton, 1, 3);
-        this.add(paymentButton, 2, 3);
+        this.add(holdButton, 0, 5);
+        this.add(activateButton, 0, 5);
+        this.add(cancelButton, 1, 5);
+        this.add(paymentButton, 2, 5);
     }
     private TableColumn<Article, Void> createRemoveButton(ShoppingCartController shoppingCartController) {
         TableColumn<Article, Void> removeButton = new TableColumn<Article, Void>("Remove");
@@ -180,5 +194,9 @@ public class KassaPane extends GridPane {
             holdButton.setDisable(false);
             holdButton.setVisible(true);
         }
+    }
+    public void updateView(double totalPrice, ObservableList<Article> cart, double discountPrice){
+        bedrag.setText(Double.toString(totalPrice));
+        cartView.setItems(cart);
     }
 }

@@ -1,6 +1,6 @@
 package model.discountStrategy;
-
-import model.loadSaveStrategy.LoadSaveEnum;
+import javafx.collections.ObservableList;
+import model.Article;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,15 +14,7 @@ public class DiscountContext {
 
     public void setStrategy(DiscountStrategy strategy) { this.strategy = strategy; }
 
-    public void calculateDiscount(){ strategy.calculateDiscount();}
-
-    public double getTotalDiscount(){
-        return strategy.getTotalDiscount();
-    }
-
-    public double getTotalAfterDiscount(){
-        return strategy.getTotalAfterDiscount();
-    }
+    public double calculateDiscount(double totalPrice, ObservableList<Article> cart){ return strategy.calculateDiscount(totalPrice, cart);}
 
     public double getPercentage(){
         return strategy.getPercentage();

@@ -1,23 +1,28 @@
 package model.discountStrategy;
 
+import javafx.collections.ObservableList;
+import model.Article;
+
 /**
  * @author Jonna J.
  * Discount calculate for whole shopping cart that has value more than thresholdValue
  */
 public class ThresholdDiscount extends DiscountStrategy {
 
-    private double thresholdValue = 0;
+    private double thresholdValue;
 
     public ThresholdDiscount(String args) {
         super(args);
-        //setThresholdValue(Double.parseDouble(thresholdValue));
         String[] values = args.split("/");
         setThresholdValue(Double.parseDouble(values[1]));
     }
 
     @Override
-    public void calculateDiscount() {
-        System.out.println("Calculating group discount for " + this.getPercentage() + " basket over " + getThresholdValue());
+    public double calculateDiscount(double totalPrice, ObservableList<Article> cart) {
+        if(totalPrice >= thresholdValue){
+            return totalPrice - (totalPrice * getPercentage() /100);
+        }
+        return totalPrice;
     }
 
     public void setThresholdValue(double thresholdValue) {
@@ -26,10 +31,5 @@ public class ThresholdDiscount extends DiscountStrategy {
 
     public double getThresholdValue(){
         return this.thresholdValue;
-    }
-
-    public void setValues(double percentage, double thresholdValue){
-        setPercentage(percentage);
-        setThresholdValue(thresholdValue);
     }
 }
