@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import model.Article;
 import model.discountStrategy.DiscountContext;
+import model.states.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +30,20 @@ public class ShoppingCart implements Observable {
     private DiscountContext discount;
     private double totalAfterDiscount = 0;
 
+    State onHoldState;
+    State cancelledState;
+    State activeState;
+    State soldState;
+
+    State state = null;
+
     public ShoppingCart(DiscountContext discountContext){
         this.discount = discountContext;
+        onHoldState = new OnHoldState(this);
+        cancelledState = new CancelledState(this);
+        activeState = new ActiveState(this);
+        soldState = new SoldState(this);
+        state = activeState;
     }
 
     //TODO, cashier needs all the items listed, only client needs to view the items listed once with updated stock
@@ -66,18 +79,43 @@ public class ShoppingCart implements Observable {
     }
 
     public void putCartOnHold(){
+        try{
+            state.placeOnHold();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         cartOnHold = FXCollections.observableArrayList(contents);
         contents.clear();
         fireListeners();
     }
 
     public ObservableList<Article> getCartFromHold(){
+        try{
+            state.activate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         contents = FXCollections.observableArrayList(cartOnHold);
         fireListeners();
         return contents;
     }
 
-    public void clearCart(){
+    public void sellCart(){
+        try{
+            state.finishSale();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        contents.clear();
+        fireListeners();
+    }
+
+    public void cancelCart(){
+        try{
+            state.cancel();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         contents.clear();
         fireListeners();
     }
@@ -123,4 +161,15 @@ public class ShoppingCart implements Observable {
         listeners.remove(listener);
     }
 
+    public State getState(){return state; }
+
+    public void setState(State state){this.state = state;}
+
+    public State getActiveState(){return activeState;}
+
+    public State getOnHoldState(){return onHoldState;}
+
+    public State getCancelledState(){return cancelledState;}
+
+    public State getSoldState(){return soldState;}
 }

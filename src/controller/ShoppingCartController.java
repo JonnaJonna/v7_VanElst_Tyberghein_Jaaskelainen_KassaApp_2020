@@ -35,9 +35,11 @@ public class ShoppingCartController {
         return cart.getCartFromHold();
     }
 
-    public void clearCart() {
-        cart.clearCart();
+    public void sellCart() {
+        cart.sellCart();
     }
+
+    public void cancelCart(){cart.cancelCart();}
 
     public void registerObserver(ShoppingCartObserver observer) {
         cart.addListener(new ShoppingCartListener() {
@@ -64,5 +66,16 @@ public class ShoppingCartController {
 
     public boolean removeArticle(Article article){
         return cart.removeArticle(article);
+    }
+
+    public double getArticlePrice(String codeString){
+        int code = Integer.parseInt(codeString);
+        ObservableList<Article> articles = context.load();
+        for(Article a: articles){
+            if(code == a.getArticleCode()){
+                return a.getPrice();
+            }
+        }
+        return 0;
     }
 }

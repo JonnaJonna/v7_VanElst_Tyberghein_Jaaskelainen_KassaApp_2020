@@ -118,7 +118,7 @@ public class KassaPane extends GridPane {
         paymentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                shoppingCartController.clearCart();
+                shoppingCartController.sellCart();
                 if(holding == true){
                     if(soldCount < 2){
                         soldCount++;
@@ -136,7 +136,7 @@ public class KassaPane extends GridPane {
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                shoppingCartController.clearCart();
+                shoppingCartController.cancelCart();
             }
         });
 
