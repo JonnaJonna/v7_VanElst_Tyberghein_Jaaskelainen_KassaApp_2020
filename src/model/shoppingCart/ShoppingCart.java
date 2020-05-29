@@ -1,5 +1,6 @@
 package model.shoppingCart;
 
+import controller.ShoppingCartController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -161,8 +162,6 @@ public class ShoppingCart implements Observable {
         listeners.remove(listener);
     }
 
-    public State getState(){return state; }
-
     public void setState(State state){this.state = state;}
 
     public State getActiveState(){return activeState;}
@@ -172,4 +171,8 @@ public class ShoppingCart implements Observable {
     public State getCancelledState(){return cancelledState;}
 
     public State getSoldState(){return soldState;}
+
+    public State getState() {
+        return state;
+    }
 }

@@ -31,4 +31,9 @@ public class CancelledState extends State{
         System.out.println(shoppingCart.getState());
         throw new DomainException("This sale was already cancelled, it can't be finished anymore!");
     }
+
+    @Override
+    public State getState() {
+        return super.getState();
+    }
 }

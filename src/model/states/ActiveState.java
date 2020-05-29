@@ -33,4 +33,9 @@ public class ActiveState extends State{
         shoppingCart.setState(shoppingCart.getSoldState());
         System.out.println(shoppingCart.getState());
     }
+
+    @Override
+    public State getState() {
+        return super.getState();
+    }
 }

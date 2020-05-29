@@ -31,4 +31,9 @@ public class OnHoldState extends State {
         System.out.println(shoppingCart.getState());
         throw new DomainException("Reactive the shopping cart in order to finish the sale!");
     }
+
+    @Override
+    public State getState() {
+        return super.getState();
+    }
 }

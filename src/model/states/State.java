@@ -16,5 +16,7 @@ public abstract class State {
 
     public void finishSale(){};
 
-    public State getState(){return this.getState();}
+    public State getState(){
+        return this.getState();
+    }
 }

@@ -6,6 +6,7 @@ import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
+import model.states.State;
 
 /**
  * @author Ruben T.
@@ -17,29 +18,35 @@ public class ShoppingCartController {
     private ShoppingCart cart;
 
 
-    public ShoppingCartController(LoadSaveContext context, DiscountContext discount) {
+    public ShoppingCartController(LoadSaveContext context, DiscountContext discount){
         this.context = context;
         this.discountContext = discount;
         this.cart = new ShoppingCart(discountContext);
     }
 
-    public ObservableList<Article> getCartContents() {
+    public ObservableList<Article> getCartContents(){
         return cart.getContents();
     }
 
-    public void putCartOnHold() {
+    public void putCartOnHold(){
         cart.putCartOnHold();
     }
 
-    public ObservableList<Article> getCartFromHold() {
+    public ObservableList<Article> getCartFromHold(){
         return cart.getCartFromHold();
     }
 
-    public void sellCart() {
+    public void sellCart(){
         cart.sellCart();
     }
 
-    public void cancelCart(){cart.cancelCart();}
+    public void cancelCart(){
+        cart.cancelCart();
+    }
+
+    public State getCartState(){
+        return cart.getState();
+    }
 
     public void registerObserver(ShoppingCartObserver observer) {
         cart.addListener(new ShoppingCartListener() {

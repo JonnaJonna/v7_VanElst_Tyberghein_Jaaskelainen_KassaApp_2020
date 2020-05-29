@@ -31,4 +31,9 @@ public class SoldState extends State{
         System.out.println(shoppingCart.getState());
         throw new DomainException("This sale was already sold!");
     }
+
+    @Override
+    public State getState() {
+        return super.getState();
+    }
 }
