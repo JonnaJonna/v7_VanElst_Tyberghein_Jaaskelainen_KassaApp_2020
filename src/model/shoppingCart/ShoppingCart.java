@@ -63,13 +63,10 @@ public class ShoppingCart implements Observable {
     }
 
     public boolean removeArticle(Article articleSearch){
-        //TODO correctly add one back to stock upon removal
         for (Article article : contents) {
             if (article.getArticleCode() == articleSearch.getArticleCode()){
-                article.setStock(article.getStock()-1);
-                if (article.getStock()==0){
-                    contents.remove(article);
-                }
+                article.setStock(1);
+                contents.remove(article);
                 fireListeners();
                 return true;
             }

@@ -120,7 +120,21 @@ public class ShoppingCartController {
     }
 
     public boolean removeArticle(Article article){
-        return cart.removeArticle(article);
+        int code = article.getArticleCode();
+        ObservableList<Article> articles = context.load();
+        for (Article a: articles){
+            if(code == a.getArticleCode()){
+                Article copy = article.copy();
+                copy.setStock(1);
+                a.setStock(a.getStock()+1);
+                cart.removeArticle(copy);
+                context.save(articles);
+                System.out.println(a.getStock());
+                //TODO update product overview
+                return true;
+            }
+        }
+        return false;
     }
 
     public double getArticlePrice(String codeString){
