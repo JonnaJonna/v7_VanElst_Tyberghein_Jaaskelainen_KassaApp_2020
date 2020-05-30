@@ -2,21 +2,24 @@ package controller;
 
 import javafx.collections.ObservableList;
 import model.Article;
+import model.Shop;
 import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
 import model.states.State;
 
+import java.util.ArrayList;
+
 /**
  * @author Ruben T.
  */
 public class ShoppingCartController {
+    private ArrayList<ShoppingCartObserver> observers = new ArrayList<>();
 
     private LoadSaveContext context;
     private DiscountContext discountContext;
     private ShoppingCart cart;
-
 
     public ShoppingCartController(LoadSaveContext context, DiscountContext discount){
         this.context = context;
@@ -38,23 +41,59 @@ public class ShoppingCartController {
 
     public void sellCart(){
         cart.sellCart();
+        createNewCart();
+        registerCartListeners();
     }
 
     public void cancelCart(){
         cart.cancelCart();
+        createNewCart();
+        registerCartListeners();
     }
 
     public State getCartState(){
         return cart.getState();
     }
 
-    public void registerObserver(ShoppingCartObserver observer) {
-        cart.addListener(new ShoppingCartListener() {
-            @Override
-            public void cartChanged(ShoppingCart cart) {
-                observer.update(cart.getTotalPrice(), getCartContents(), cart.getTotalAfterDiscount());
-            }
-        });
+    public void createNewCart(){
+        this.cart = new ShoppingCart(discountContext);
+    }
+
+    public void registerCartListeners() {
+        for(ShoppingCartObserver observer : observers) {
+            cart.addListener(new ShoppingCartListener() {
+                @Override
+                public void cartChanged(ShoppingCart cart) {
+                    System.out.println("Update");
+                    observer.update(cart.getTotalPrice(), getCartContents(), cart.getTotalAfterDiscount());
+                }
+            });
+        }
+    }
+
+    public void registerCartListener(ShoppingCartObserver observer) {
+            cart.addListener(new ShoppingCartListener() {
+                @Override
+                public void cartChanged(ShoppingCart cart) {
+                    System.out.println("Update");
+                    observer.update(cart.getTotalPrice(), getCartContents(), cart.getTotalAfterDiscount());
+                }
+            });
+    }
+    /*
+    public void removeListener() {
+        for(ShoppingCartObserver observer : observers){
+            cart.removeListener(observer);
+        }
+    } */
+
+    public ArrayList<ShoppingCartObserver> getObservers(){
+        return this.observers;
+    }
+    //name addObserver
+    public void addObserver(ShoppingCartObserver observer){
+        registerCartListener(observer);
+        observers.add(observer);
     }
 
     public boolean addArticle(String codeString) {

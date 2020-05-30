@@ -11,8 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import model.Article;
 import model.Shop;
-import model.shoppingCart.ShoppingCart;
-import org.omg.PortableServer.POAManagerPackage.State;
 
 /**
  * @author Ruben T and Jonna J.
@@ -80,7 +78,7 @@ public class KassaPane extends GridPane {
 
         ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView,
                 discount, saved, shop.getDiscountContext());
-        shoppingCartController.registerObserver(observerPriceAndContents);
+        shoppingCartController.addObserver(observerPriceAndContents);
 
         //Scanning items
         code.setOnAction(new EventHandler<ActionEvent>() {

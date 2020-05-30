@@ -51,7 +51,7 @@ public class CustomerPane extends GridPane {
 
         ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView, discount,
                 saved, shop.getDiscountContext());
-        shop.getShoppingCartController().registerObserver(observerPriceAndContents);
+        shop.getShoppingCartController().addObserver(observerPriceAndContents);
     }
     public void updateView(double totalPrice, ObservableList<Article> cart, double discountPrice){
         bedrag.setText(Double.toString(totalPrice));
