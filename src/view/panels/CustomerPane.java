@@ -21,7 +21,7 @@ public class CustomerPane extends GridPane {
         this.setVgap(5);
         this.setHgap(5);
 
-        cartView = new TableView(shop.getShoppingCartController().getCartContents());
+        cartView = new TableView<>(shop.getShoppingCartController().getCartContentsCondensed());
         this.add(cartView, 0, 1);
 
         TableColumn<Article, String> colDescription = new TableColumn<Article, String>("Description");
@@ -52,9 +52,5 @@ public class CustomerPane extends GridPane {
         ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView, discount,
                 saved, shop.getDiscountContext());
         shop.getShoppingCartController().addObserver(observerPriceAndContents);
-    }
-    public void updateView(double totalPrice, ObservableList<Article> cart, double discountPrice){
-        bedrag.setText(Double.toString(totalPrice));
-        cartView.setItems(cart);
     }
 }

@@ -1,15 +1,17 @@
 package controller;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.util.Callback;
 import model.Article;
 import model.DomainException;
-import model.Shop;
 import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
 import model.states.State;
-import view.panels.ProductOverviewPane;
 
 import java.util.ArrayList;
 
@@ -31,6 +33,66 @@ public class ShoppingCartController {
 
     public ObservableList<Article> getCartContents(){
         return cart.getContents();
+    }
+
+    // Find article index
+    private int findArticle(ObservableList<Article> articles, Article article) {
+        for (int idx = 0 ; idx < articles.size() ; idx++) {
+            if (articles.get(idx).getArticleCode() == article.getArticleCode()) {
+                return idx;
+            }
+        }
+        return -1;
+    }
+
+    // Add an article to the list making sure that identical articles are merged
+    private void addArticleCondensed(ObservableList<Article> articles, Article article) {
+        int idx = findArticle(articles, article);
+        if (idx == -1) {
+            articles.add(article.copy());
+        } else {
+            articles.get(idx).setStock(articles.get(idx).getStock() + 1);
+        }
+    }
+
+    private void removeArticleCondensed(ObservableList<Article> articles, Article article) {
+        int idx = findArticle(articles, article);
+        if (idx != -1) {
+            if (articles.get(idx).getStock() <= 1) {
+                articles.remove(idx);
+            } else {
+                articles.get(idx).setStock(articles.get(idx).getStock() - 1);
+            }
+        }
+    }
+
+    // Return the articles in the shopping cart so that identical articles are added together
+    public ObservableList<Article> getCartContentsCondensed(){
+        ObservableList<Article> condensedArticles = FXCollections.observableArrayList(new Callback<Article, Observable[]>() {
+            @Override
+            public Observable[] call(Article param) {
+                return new Observable[]{param.stockProperty()};
+            }
+        });
+
+        for (Article article : cart.getContents()) {
+            addArticleCondensed(condensedArticles, article);
+        }
+
+        cart.getContents().addListener(new ListChangeListener<Article>() {
+            @Override
+            public void onChanged(Change<? extends Article> c) {
+                while (c.next()) {
+                    for (Article article : c.getAddedSubList()) {
+                        addArticleCondensed(condensedArticles, article);
+                    }
+                    for (Article article : c.getRemoved()) {
+                        removeArticleCondensed(condensedArticles, article);
+                    }
+                }
+            }
+        });
+        return condensedArticles;
     }
 
     public void putCartOnHold(){
