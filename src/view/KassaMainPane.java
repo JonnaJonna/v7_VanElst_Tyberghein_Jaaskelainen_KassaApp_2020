@@ -14,13 +14,13 @@ public class KassaMainPane extends BorderPane {
 	    TabPane tabPane = new TabPane();
 
         KassaPane kassaPane = new KassaPane(shop);
-        Tab kassaTab = new Tab("Kassa", kassaPane);
+        Tab kassaTab = new Tab("Cash desk", kassaPane);
 
         ProductOverviewPane productOverviewPane = new ProductOverviewPane(shop);
-        Tab artikelTab = new Tab("Artikelen",productOverviewPane);
+        Tab artikelTab = new Tab("Articles",productOverviewPane);
 
         SettingsPane settingsPane = new SettingsPane(shop);
-        Tab instellingTab = new Tab("Instellingen", settingsPane);
+        Tab instellingTab = new Tab("Settings", settingsPane);
 
         //LogPane logPane = new LogPane(shop);
         Tab logTab = new Tab("Log");

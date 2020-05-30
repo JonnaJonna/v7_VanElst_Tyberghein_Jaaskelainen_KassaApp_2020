@@ -11,7 +11,7 @@ public class KlantView {
 	private Stage stage = new Stage();		
 		
 	public KlantView(Shop shop){
-		stage.setTitle("KLANT VIEW");
+		stage.setTitle("CASH DESK");
 		stage.setResizable(false);		
 		stage.setX(775);
 		stage.setY(20);

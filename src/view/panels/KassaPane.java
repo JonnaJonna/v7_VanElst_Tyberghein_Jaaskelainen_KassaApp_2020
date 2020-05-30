@@ -55,7 +55,7 @@ public class KassaPane extends GridPane {
         TableColumn<Article, String> colPrice = new TableColumn<Article, String>("Price");
         colPrice.setMinWidth(150);
         colPrice.setCellValueFactory(new PropertyValueFactory<Article, String>("price"));
-        TableColumn<Article, Integer> colAantal = new TableColumn<Article, Integer>("Aantal");
+        TableColumn<Article, Integer> colAantal = new TableColumn<Article, Integer>("Amount");
         colAantal.setMinWidth(150);
         colAantal.setCellValueFactory(new PropertyValueFactory<Article, Integer>("stock"));
 
@@ -64,7 +64,7 @@ public class KassaPane extends GridPane {
         cartView.getColumns().addAll(colDescription, colPrice, colAantal, removeButton);
 
         //Total price label
-        Label info = new Label("De huidige prijs is: €");
+        Label info = new Label("Current amount is: €");
         bedrag = new Label("0");
         infoSaved = new Label("You saved: € ");
         saved = new Label("0");

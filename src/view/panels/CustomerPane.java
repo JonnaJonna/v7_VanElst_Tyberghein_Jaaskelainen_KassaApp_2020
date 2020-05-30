@@ -30,13 +30,13 @@ public class CustomerPane extends GridPane {
         TableColumn<Article, String> colPrice = new TableColumn<Article, String>("Price");
         colPrice.setMinWidth(100);
         colPrice.setCellValueFactory(new PropertyValueFactory<Article, String>("price"));
-        TableColumn<Article, Integer> colAantal = new TableColumn<Article, Integer>("Aantal");
+        TableColumn<Article, Integer> colAantal = new TableColumn<Article, Integer>("Amount");
         colAantal.setMinWidth(100);
         colAantal.setCellValueFactory(new PropertyValueFactory<Article, Integer>("stock"));
 
         cartView.getColumns().addAll(colDescription, colPrice, colAantal);
 
-        info = new Label("De huidige prijs is: €");
+        info = new Label("Current amount is: €");
         bedrag = new Label("0");
         infoSaved = new Label("You saved: € ");
         saved = new Label("0");

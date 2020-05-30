@@ -10,7 +10,7 @@ public class KassaView {
 	private Stage stage = new Stage();		
 		
 	public KassaView(Shop shop){
-		stage.setTitle("KASSA VIEW");
+		stage.setTitle("CASH DESK");
 		stage.setResizable(false);		
 		stage.setX(20);
 		stage.setY(20);
