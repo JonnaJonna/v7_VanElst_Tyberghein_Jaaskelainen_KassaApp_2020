@@ -107,6 +107,10 @@ public class ShoppingCart implements Observable {
         }catch (Exception e){
             e.printStackTrace();
         }
+        for(Article a:contents){
+            a.setStock(a.getStock()-1);
+        }
+        //TODO notify the necessary classes of the stock change
         contents.clear();
         fireListeners();
     }

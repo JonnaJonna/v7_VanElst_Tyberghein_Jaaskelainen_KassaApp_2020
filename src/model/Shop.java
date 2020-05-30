@@ -12,9 +12,9 @@ import model.loadSaveStrategy.LoadSaveContext;
 public class Shop {
 
     private ShoppingCartController shoppingCartController;
-    private ObservableList<Article> articles;
     private DiscountContext discountContext;
     private LoadSaveContext loadSaveContext;
+    private ObservableList<Article> articles;
 
     public Shop(LoadSaveContext loadSaveContext, DiscountContext discountContext) {
         shoppingCartController = new ShoppingCartController(loadSaveContext, discountContext);
