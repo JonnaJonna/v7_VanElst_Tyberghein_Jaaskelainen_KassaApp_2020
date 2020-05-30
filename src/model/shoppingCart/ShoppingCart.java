@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import model.Article;
+import model.database.ExcelLoadSaveStrategy;
 import model.discountStrategy.DiscountContext;
 import model.states.*;
 import view.panels.ProductOverviewPane;
@@ -103,19 +104,6 @@ public class ShoppingCart implements Observable {
     public void sellCart(){
         try{
             state.finishSale();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        for(Article a:contents){
-            a.setStock(a.getStock()-1);
-        }
-        contents.clear();
-        fireListeners();
-    }
-
-    public void cancelCart(){
-        try{
-            state.cancel();
         }catch (Exception e){
             e.printStackTrace();
         }

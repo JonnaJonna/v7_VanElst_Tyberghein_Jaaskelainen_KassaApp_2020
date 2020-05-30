@@ -93,6 +93,9 @@ public class KassaPane extends GridPane {
                 else{
                     //add to tableview
                     code.setText("");
+                    if(holding){
+                        activateButton.setDisable(true);
+                    }
                 }
             }
         });
@@ -124,6 +127,7 @@ public class KassaPane extends GridPane {
                     if(soldCount < 2){
                         soldCount++;
                         System.out.println(soldCount);
+                        activateButton.setDisable(false);
                     }
                     else{
                         System.out.println("Hold is cancelled!");
@@ -138,6 +142,9 @@ public class KassaPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 shoppingCartController.cancelCart();
+                if(holding){
+                    activateButton.setDisable(false);
+                }
             }
         });
 
@@ -160,6 +167,9 @@ public class KassaPane extends GridPane {
                         btn.setOnAction((ActionEvent event) -> {
                             Article article = getTableView().getItems().get(getIndex());
                             shoppingCartController.removeArticle(article);
+                            if(holding && getTableView().getItems().size()==0){
+                                activateButton.setDisable(false);
+                            }
                         });
                     }
 

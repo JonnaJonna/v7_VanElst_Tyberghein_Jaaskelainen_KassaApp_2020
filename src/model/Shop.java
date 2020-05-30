@@ -36,4 +36,12 @@ public class Shop {
     }
 
     public LoadSaveContext getLoadSaveContext(){return this.loadSaveContext;}
+
+    public void updateArticle(Article newArticle){
+        for(int i=0; i<articles.size(); i++){
+            if(articles.get(i).getArticleCode() == newArticle.getArticleCode()){
+                articles.set(i, newArticle);
+            }
+        }
+    }
 }
