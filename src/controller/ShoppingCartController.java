@@ -2,12 +2,14 @@ package controller;
 
 import javafx.collections.ObservableList;
 import model.Article;
+import model.DomainException;
 import model.Shop;
 import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
 import model.states.State;
+import view.panels.ProductOverviewPane;
 
 import java.util.ArrayList;
 
@@ -100,11 +102,18 @@ public class ShoppingCartController {
         int code = Integer.parseInt(codeString);
         ObservableList<Article> articles = context.load();
         for (Article article : articles) {
-            if (code == article.getArticleCode()) {
+            if (code == article.getArticleCode() && article.getStock()>0) {
                 Article copy = article.copy();
                 copy.setStock(1);
+                article.setStock(article.getStock()-1);
                 cart.addArticle(copy);
+                context.save(articles);
+                System.out.println(article.getStock());
+                //TODO update product overview
                 return true;
+            }
+            else if(code == article.getArticleCode()){
+                throw new DomainException("STOCK IS EMPTY!");
             }
         }
         return false;

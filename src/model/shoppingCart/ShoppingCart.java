@@ -9,6 +9,7 @@ import javafx.util.Callback;
 import model.Article;
 import model.discountStrategy.DiscountContext;
 import model.states.*;
+import view.panels.ProductOverviewPane;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class ShoppingCart implements Observable {
     }
 
     public boolean removeArticle(Article articleSearch){
+        //TODO correctly add one back to stock upon removal
         for (Article article : contents) {
             if (article.getArticleCode() == articleSearch.getArticleCode()){
                 article.setStock(article.getStock()-1);
@@ -110,7 +112,6 @@ public class ShoppingCart implements Observable {
         for(Article a:contents){
             a.setStock(a.getStock()-1);
         }
-        //TODO notify the necessary classes of the stock change
         contents.clear();
         fireListeners();
     }

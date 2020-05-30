@@ -25,6 +25,7 @@ public class KassaPane extends GridPane {
     protected Button activateButton;
     protected Button paymentButton;
     protected Button cancelButton;
+    ProductOverviewPane productOverviewPane;
 
     public KassaPane(Shop shop) {
         ShoppingCartController shoppingCartController = shop.getShoppingCartController();
