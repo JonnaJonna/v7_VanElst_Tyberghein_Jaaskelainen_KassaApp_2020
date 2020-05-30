@@ -29,12 +29,14 @@ import java.util.List;
 public class SettingsPane extends GridPane {
     protected ToggleGroup tg, rg, gt, gc;
     protected Label percentageLabel, paramsLabel;
-    protected TextField percentageField, paramsField;
+    protected TextField percentageField, paramsField, headerField, footerField;
     protected KassaProperties kassaProperties = new KassaProperties();
 
     public SettingsPane(Shop shop) {
         tg = new ToggleGroup();
-        rg = new ToggleGroup(); //create the RadioGroup
+        rg = new ToggleGroup();
+        gt = new ToggleGroup();
+        gc = new ToggleGroup(); //create the RadioGroup
 
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
@@ -68,19 +70,20 @@ public class SettingsPane extends GridPane {
         this.add(discountParams, 0, 5);
         this.add(invoiceHeaderLabel, 0, 7);
         this.add(invoiceFooterLabel, 0, 9);
-        TextField generalMessageText = new TextField();
-        generalMessageText.setDisable(true);
+        headerField = new TextField();
+        headerField.setDisable(true);
         RadioButton dateTime = new RadioButton("DATE + TIME");
         RadioButton totalPrice = new RadioButton("NON-DISCOUNTED PRICE");
         RadioButton priceVAT = new RadioButton("SHOW VAT");
-        TextField generalClosureText = new TextField();
-        generalClosureText.setDisable(true);
+        footerField = new TextField();
+        footerField.setDisable(true);
 
-        this.add(generalMessageText, 2, 7);
+        this.add(headerField, 2, 7);
         this.add(dateTime, 1, 8);
         this.add(totalPrice, 1, 9);
         this.add(priceVAT, 1, 10);
-        this.add(generalClosureText, 2, 11);
+        this.add(footerField, 2, 11);
+        enableMessageFields();
 
         this.add(saveButton, 3, 15);
         saveButton.setTranslateX(75);
@@ -155,5 +158,26 @@ public class SettingsPane extends GridPane {
                     }
             }
         }});
+    }
+    private void enableMessageFields(){
+        enableField(gt, headerField);
+        enableField(gc, footerField);
+    }
+
+    private void enableField(ToggleGroup toggleGroup, TextField textField) {
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                textField.clear();
+                if(toggleGroup.getSelectedToggle() != null){
+                    RadioButton rb = (RadioButton) toggleGroup.getSelectedToggle();
+                    if(rb.getText().equals("NONE")){
+                        textField.setDisable(true);
+                    }else{
+                        textField.setDisable(false);
+                    }
+                }
+            }
+        });
     }
 }

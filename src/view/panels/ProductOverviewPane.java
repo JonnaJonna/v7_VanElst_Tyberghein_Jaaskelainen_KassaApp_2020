@@ -1,6 +1,9 @@
 package view.panels;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,8 +15,10 @@ import model.Shop;
 /**
  * @author Jonna J.
  */
-public class ProductOverviewPane extends GridPane {
+public class ProductOverviewPane extends GridPane{
 	private TableView<Article> table;
+	protected Button restockButton;
+	protected Button refreshButton;
 
 	public ProductOverviewPane(Shop shop) {
 		this.setPadding(new Insets(5, 5, 5, 5));
@@ -43,6 +48,39 @@ public class ProductOverviewPane extends GridPane {
 		table.getSortOrder().add(colDescription);
 
 		this.getChildren().addAll(table);
+
+		refreshButton = new Button("REFRESH OVERVIEW");
+		restockButton = new Button("RESTOCK STORE");
+
+		this.add(refreshButton, 0, 3);
+		refreshButton.setTranslateX(200);
+		this.add(restockButton, 0, 3);
+		restockButton.setTranslateX(400);
+
+
+
+		restockButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				for(Article a: table.getItems()){
+					a.setStock(10);
+				}
+				shop.getLoadSaveContext().save(table.getItems());
+				refresh();
+			}
+		});
+
+		refreshButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				table.setItems(shop.getLoadSaveContext().load());
+				refresh();
+			}
+		});
 	}
 	public void refresh(){table.refresh();}
+
+	public TableView<Article> getTable() {
+		return table;
+	}
 }

@@ -11,6 +11,7 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import model.Article;
 import model.Shop;
+import view.KassaView;
 
 /**
  * @author Ruben T and Jonna J.
@@ -25,7 +26,6 @@ public class KassaPane extends GridPane {
     protected Button activateButton;
     protected Button paymentButton;
     protected Button cancelButton;
-    ProductOverviewPane productOverviewPane;
 
     public KassaPane(Shop shop) {
         ShoppingCartController shoppingCartController = shop.getShoppingCartController();
