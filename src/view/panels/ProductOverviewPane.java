@@ -80,6 +80,11 @@ public class ProductOverviewPane extends GridPane{
 	}
 	public void refresh(){table.refresh();}
 
+	public void refreshOverview(Shop shop){
+		table.setItems(shop.getLoadSaveContext().load());
+		refresh();
+	}
+
 	public TableView<Article> getTable() {
 		return table;
 	}
