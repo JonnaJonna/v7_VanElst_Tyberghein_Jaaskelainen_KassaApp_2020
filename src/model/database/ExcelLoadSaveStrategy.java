@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import excel.ExcelPlugin;
 
 /** @author Jonna J.
+ * !!!! This class is using external ExcelPlugin jar files, so make sure to add them to the project or the
+ * application will give you an error!
+ * PROJECT STUCTURE > DEPENDENCIES > ADD JAR > FIND YOUR FILES
  */
 
 public class ExcelLoadSaveStrategy implements LoadSaveStrategy {

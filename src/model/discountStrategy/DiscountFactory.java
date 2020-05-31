@@ -11,8 +11,6 @@ public class DiscountFactory {
         DiscountStrategy discountStrategy = null;
         try{
             Class strategyClass = Class.forName(className);
-            //Object dbobject = strategyClass.getDeclaredConstructor().newInstance();
-            //discountStrategy = (DiscountStrategy) dbobject;
             Constructor ctor = strategyClass.getDeclaredConstructor(String.class);
             ctor.setAccessible(true);
             discountStrategy = (DiscountStrategy)ctor.newInstance(params);
