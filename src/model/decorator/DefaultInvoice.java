@@ -1,8 +1,11 @@
 package model.decorator;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Article;
 import model.shoppingCart.ShoppingCart;
+
+import java.util.ArrayList;
 
 /**
  * @author Wouter V.E.
@@ -13,6 +16,8 @@ public class DefaultInvoice extends Invoice {
     public ObservableList<Article> invoiceItems;
 
     public DefaultInvoice(ShoppingCart cart){
+        invoiceItems = FXCollections.observableArrayList(cart.getContents());
+
         for(Article a:cart.getContents()){
             for(Article b:invoiceItems){
                 if(a.getArticleCode()==b.getArticleCode()){

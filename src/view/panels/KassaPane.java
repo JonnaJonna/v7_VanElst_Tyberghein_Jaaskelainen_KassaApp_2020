@@ -11,6 +11,8 @@ import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import model.Article;
 import model.Shop;
+import model.decorator.DefaultInvoice;
+import model.decorator.Invoice;
 import view.KassaView;
 
 /**
@@ -119,9 +121,17 @@ public class KassaPane extends GridPane {
             }
         });
         //TODO handle payments
+        /*
+        so when you make the payment you need to:
+        call method "completeInvoice" which requires the shoppingcart + 5 booleans (booleans pulled from properties, these are the things you mark in settings pane)
+        and then System.out.println the "getInvoice" method on that invoice you just mad
+         */
         paymentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                DefaultInvoice invoice = new DefaultInvoice(shoppingCartController.getShoppingCart());
+                System.out.println(invoice.getText());
+
                 logPane.addSaleToLog(shoppingCartController.getCartTotalPrice(),    //log sale
                         shoppingCartController.getCartPriceAfterDiscount());
                 shoppingCartController.sellCart();
@@ -137,6 +147,9 @@ public class KassaPane extends GridPane {
                         holdActiveButtons();
                     }
                 } else soldCount = 0;
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setContentText("Info");
+                alert.show();
             }
         });
 

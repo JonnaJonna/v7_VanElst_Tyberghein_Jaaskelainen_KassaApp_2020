@@ -131,6 +131,10 @@ public class ShoppingCartController {
         this.cart = new ShoppingCart(discountContext);
     }
 
+    public ShoppingCart getShoppingCart(){
+        return cart.getShoppingCart();
+    }
+
     public double getCartTotalPrice(){
         return cart.getTotalPrice();
     }
