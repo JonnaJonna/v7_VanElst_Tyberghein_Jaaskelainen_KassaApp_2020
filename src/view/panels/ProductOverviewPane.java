@@ -48,12 +48,8 @@ public class ProductOverviewPane extends GridPane{
 
 		this.getChildren().addAll(table);
 
-		//refreshButton = new Button("REFRESH OVERVIEW");
 		restockButton = new Button("RESTOCK STORE");
 
-		/*
-		this.add(refreshButton, 0, 3);
-		refreshButton.setTranslateX(200); */
 		this.add(restockButton, 0, 3);
 		restockButton.setTranslateX(400);
 
@@ -69,14 +65,6 @@ public class ProductOverviewPane extends GridPane{
 				refresh();
 			}
 		});
-		/*
-		refreshButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				table.setItems(shop.getLoadSaveContext().load());
-				refresh();
-			}
-		}); */
 	}
 	public void refresh(){table.refresh();}
 

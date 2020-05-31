@@ -1,6 +1,6 @@
-1,article1,gr1,12.5,9
+1,article1,gr1,12.5,10
 10,article10,gr2,66.25,10
-2,article2,gr1,22.4,8
+2,article2,gr1,22.4,10
 3,article3,gr1,12.5,10
 4,article4,gr1,50.5,10
 5,article5,gr1,2.5,10
