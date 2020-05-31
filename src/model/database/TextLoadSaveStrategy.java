@@ -20,7 +20,7 @@ public class TextLoadSaveStrategy implements LoadSaveStrategy {
 
     Article article = null;
     private ObservableList<Article> articles;
-    private File filename = new File("src/files/article.txt");
+    private File filename = new File("src/files/artikel.txt");
 
     private TextLoadSaveStrategy(){}
 

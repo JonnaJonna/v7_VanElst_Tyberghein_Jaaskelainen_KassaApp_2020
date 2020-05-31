@@ -20,7 +20,7 @@ public class ExcelLoadSaveStrategy implements LoadSaveStrategy {
 
     Article article = null;
     private ObservableList<Article> articles;
-    private File filename = new File("src/files/article.xls");
+    private File filename = new File("src/files/artikel.xls");
 
     private ExcelLoadSaveStrategy(){}
 
