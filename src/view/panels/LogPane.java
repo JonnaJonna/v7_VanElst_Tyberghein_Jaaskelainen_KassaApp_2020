@@ -3,10 +3,8 @@ package view.panels;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import model.Shop;
-import java.awt.*;
 import java.time.LocalDateTime;
-import javafx.scene.control.TextField;
+
 
 public class LogPane extends GridPane {
 
@@ -28,7 +26,6 @@ public class LogPane extends GridPane {
         String date = timestamp.getDayOfMonth() + "/" + timestamp.getMonth().toString() + "/" + timestamp.getYear();
         String time = timestamp.getHour() + ":" + timestamp.getMinute() + ":" + timestamp.getSecond();
 
-        logText.setText(logText + "Sale made on " + date + " at " + time + ": total price of €" + totalprice +  " with discount of €" + (totalprice - discountedPrice) + " for finalised price of €" + discountedPrice + ".\n" );
-
+        logText.setText(logText.getText() + "\nSale made on " + date + " at " + time + ": \nTotal price of €" + totalprice +  " with discount of €" + (totalprice - discountedPrice) + " for finalised price of €" + discountedPrice + ".\n\n" );
     }
 }

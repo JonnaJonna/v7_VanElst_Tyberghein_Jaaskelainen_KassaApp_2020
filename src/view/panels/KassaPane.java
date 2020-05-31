@@ -122,6 +122,8 @@ public class KassaPane extends GridPane {
         paymentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                logPane.addSaleToLog(shoppingCartController.getCartTotalPrice(),    //log sale
+                        shoppingCartController.getCartPriceAfterDiscount());
                 shoppingCartController.sellCart();
                 if(holding == true){
                     if(soldCount < 2){

@@ -131,6 +131,14 @@ public class ShoppingCartController {
         this.cart = new ShoppingCart(discountContext);
     }
 
+    public double getCartTotalPrice(){
+        return cart.getTotalPrice();
+    }
+
+    public double getCartPriceAfterDiscount(){
+        return cart.getTotalAfterDiscount();
+    }
+
     public void registerCartListeners() {
         for(ShoppingCartObserver observer : observers) {
             cart.addListener(new ShoppingCartListener() {
