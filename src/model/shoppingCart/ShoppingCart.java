@@ -126,6 +126,10 @@ public class ShoppingCart implements Observable {
         return price;
     }
 
+    public ShoppingCart getShoppingCart(){
+        return this;
+    }
+
     public double getTotalAfterDiscount(){
         return totalAfterDiscount;
     }

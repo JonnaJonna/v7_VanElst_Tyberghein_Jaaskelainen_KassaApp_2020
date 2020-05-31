@@ -32,7 +32,7 @@ public class ObserverPriceAndContents implements ShoppingCartObserver {
     @Override
     public void update(double totalPrice, ObservableList<Article> cart, double discountP) {
         prijsLabel.setText(dec.format(totalPrice) );
-//        tableView.setItems(cart);  removed this because not needed with observable list
+        tableView.setItems(cart);  //it's needed! -> don't comment
         discountPrice.setText(dec.format(discountP));
         savedPrice.setText("- " + dec.format((totalPrice-discountP)));
     }

@@ -14,7 +14,10 @@ public class KassaMainPane extends BorderPane {
 	public KassaMainPane(Shop shop){
 	    TabPane tabPane = new TabPane();
 
-        KassaPane kassaPane = new KassaPane(shop);
+        LogPane logPane = new LogPane();
+        Tab logTab = new Tab("Log", logPane);
+
+        KassaPane kassaPane = new KassaPane(shop, logPane);
         Tab kassaTab = new Tab("Cash desk", kassaPane);
 
         ProductOverviewPane productOverviewPane = new ProductOverviewPane(shop);
@@ -23,8 +26,6 @@ public class KassaMainPane extends BorderPane {
         SettingsPane settingsPane = new SettingsPane(shop);
         Tab instellingTab = new Tab("Settings", settingsPane);
 
-        LogPane logPane = new LogPane();
-        Tab logTab = new Tab("Log", logPane);
 
         tabPane.getTabs().add(kassaTab);
         tabPane.getTabs().add(artikelTab);

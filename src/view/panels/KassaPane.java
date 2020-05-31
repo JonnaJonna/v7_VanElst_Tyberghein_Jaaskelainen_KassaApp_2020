@@ -27,7 +27,7 @@ public class KassaPane extends GridPane {
     protected Button paymentButton;
     protected Button cancelButton;
 
-    public KassaPane(Shop shop) {
+    public KassaPane(Shop shop, LogPane logPane) {
         ShoppingCartController shoppingCartController = shop.getShoppingCartController();
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);

@@ -24,6 +24,7 @@ public class ShoppingCartController {
     private LoadSaveContext context;
     private DiscountContext discountContext;
     private ShoppingCart cart;
+    private ShoppingCart cartOnHold;
 
     public ShoppingCartController(LoadSaveContext context, DiscountContext discount){
         this.context = context;
@@ -97,9 +98,13 @@ public class ShoppingCartController {
 
     public void putCartOnHold(){
         cart.putCartOnHold();
+        this.cartOnHold = cart.getShoppingCart();
+        createNewCart();
+        registerCartListeners();
     }
 
     public ObservableList<Article> getCartFromHold(){
+        this.cart = cartOnHold;
         return cart.getCartFromHold();
     }
 
