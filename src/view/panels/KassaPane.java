@@ -129,8 +129,13 @@ public class KassaPane extends GridPane {
         paymentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                //alert.setContentText("Info");
+                //alert.show();
                 DefaultInvoice invoice = new DefaultInvoice(shoppingCartController.getShoppingCart());
-                System.out.println(invoice.getText());
+                invoice.completeInvoice(shoppingCartController.getShoppingCart());
+                //System.out.println(invoice.getText());
+                System.out.println(invoice.completeInvoice(shoppingCartController.getShoppingCart()).getInvoice());
 
                 logPane.addSaleToLog(shoppingCartController.getCartTotalPrice(),    //log sale
                         shoppingCartController.getCartPriceAfterDiscount());
@@ -147,9 +152,7 @@ public class KassaPane extends GridPane {
                         holdActiveButtons();
                     }
                 } else soldCount = 0;
-                alert.setAlertType(Alert.AlertType.INFORMATION);
-                alert.setContentText("Info");
-                alert.show();
+
             }
         });
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class DefaultInvoice extends Invoice {
 
     public ObservableList<Article> invoiceItems;
-    KassaProperties properties;
+    private KassaProperties properties = new KassaProperties();
 
     public DefaultInvoice(ShoppingCart cart){
         invoiceItems = FXCollections.observableArrayList(cart.getContents());
