@@ -130,12 +130,11 @@ public class KassaPane extends GridPane {
             @Override
             public void handle(ActionEvent event) {
                 alert.setAlertType(Alert.AlertType.INFORMATION);
-                //alert.setContentText("Info");
-                //alert.show();
                 DefaultInvoice invoice = new DefaultInvoice(shoppingCartController.getShoppingCart());
                 invoice.completeInvoice(shoppingCartController.getShoppingCart());
-                //System.out.println(invoice.getText());
-                System.out.println(invoice.completeInvoice(shoppingCartController.getShoppingCart()).getInvoice());
+                alert.setContentText(invoice.completeInvoice(shoppingCartController.getShoppingCart()).getInvoice());
+                alert.show();
+                //System.out.println();
 
                 logPane.addSaleToLog(shoppingCartController.getCartTotalPrice(),    //log sale
                         shoppingCartController.getCartPriceAfterDiscount());

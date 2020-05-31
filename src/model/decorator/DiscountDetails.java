@@ -9,8 +9,9 @@ import model.shoppingCart.ShoppingCart;
 public class DiscountDetails extends InvoiceDecorator{
     Invoice invoice;
     ShoppingCart cart;
-    public DiscountDetails(Invoice invoice){
+    public DiscountDetails(Invoice invoice, ShoppingCart cart){
         this.invoice = invoice;
+        this.cart = cart;
     }
     @Override
     public String getInvoice() {

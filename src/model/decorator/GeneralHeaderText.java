@@ -10,8 +10,9 @@ public class GeneralHeaderText extends InvoiceDecorator{
     Invoice invoice;
     KassaProperties properties;
 
-    public GeneralHeaderText(Invoice invoice){
+    public GeneralHeaderText(Invoice invoice, KassaProperties properties){
         this.invoice = invoice;
+        this.properties = properties;
     }
     @Override
     public String getInvoice() {

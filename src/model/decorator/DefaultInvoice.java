@@ -38,19 +38,19 @@ public class DefaultInvoice extends Invoice {
         public Invoice completeInvoice(ShoppingCart cart){
         Invoice invoice = new DefaultInvoice(cart);
         if(properties.getNeedsHeaderText()){
-            invoice = new GeneralHeaderText(invoice);
+            invoice = new GeneralHeaderText(invoice, properties);
         }
         if(properties.getNeedsDateAndTime()){
             invoice = new DateAndTime(invoice);
         }
         if(properties.getNeedsDiscountDetails()){
-            invoice = new DiscountDetails(invoice);
+            invoice = new DiscountDetails(invoice, cart);
         }
         if(properties.getNeedsVATDetails()){
-            invoice = new VATDetails(invoice);
+            invoice = new VATDetails(invoice, cart);
         }
         if(properties.getNeedsFooterText()){
-            invoice = new GeneralFooterText(invoice);
+            invoice = new GeneralFooterText(invoice, properties);
         }
         return invoice;
     }
