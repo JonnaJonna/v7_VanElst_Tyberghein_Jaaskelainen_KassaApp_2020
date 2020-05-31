@@ -8,7 +8,7 @@
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../ExcelPlugin.jar!/" />
@@ -19,13 +19,26 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../jxl-2.6.12.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../jar files" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../jar files" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../jar files" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../jar files" recursive="false" type="SOURCES" />
       </library>
     </orderEntry>
   </component>

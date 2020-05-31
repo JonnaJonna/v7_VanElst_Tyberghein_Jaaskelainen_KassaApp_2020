@@ -5,6 +5,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import java.time.LocalDateTime;
 
+/**
+ * @author Wouter V.E.
+ */
 
 public class LogPane extends GridPane {
 
