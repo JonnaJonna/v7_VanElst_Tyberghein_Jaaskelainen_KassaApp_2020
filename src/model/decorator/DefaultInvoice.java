@@ -3,6 +3,7 @@ package model.decorator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Article;
+import model.KassaProperties;
 import model.shoppingCart.ShoppingCart;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class DefaultInvoice extends Invoice {
 
     public ObservableList<Article> invoiceItems;
+    KassaProperties properties;
 
     public DefaultInvoice(ShoppingCart cart){
         invoiceItems = FXCollections.observableArrayList(cart.getContents());
@@ -33,21 +35,21 @@ public class DefaultInvoice extends Invoice {
     }
 
     //TODO finalizing a sale calls completeInvoice and prints the result to the console
-    public Invoice completeInvoice(ShoppingCart cart, boolean needsHeaderText, boolean needsDateAndTime, boolean needsDiscountDetails, boolean needsVATDetails, boolean needsFooterText){
+        public Invoice completeInvoice(ShoppingCart cart){
         Invoice invoice = new DefaultInvoice(cart);
-        if(needsHeaderText){
+        if(properties.getNeedsHeaderText()){
             invoice = new GeneralHeaderText(invoice);
         }
-        if(needsDateAndTime){
+        if(properties.getNeedsDateAndTime()){
             invoice = new DateAndTime(invoice);
         }
-        if(needsDiscountDetails){
+        if(properties.getNeedsDiscountDetails()){
             invoice = new DiscountDetails(invoice);
         }
-        if(needsVATDetails){
+        if(properties.getNeedsVATDetails()){
             invoice = new VATDetails(invoice);
         }
-        if(needsFooterText){
+        if(properties.getNeedsFooterText()){
             invoice = new GeneralFooterText(invoice);
         }
         return invoice;

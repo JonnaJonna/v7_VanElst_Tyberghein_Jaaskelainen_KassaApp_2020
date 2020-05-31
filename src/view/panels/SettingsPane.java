@@ -27,7 +27,7 @@ import java.util.List;
  */
 //tab3 of kassaview
 public class SettingsPane extends GridPane {
-    protected ToggleGroup tg, rg, gt, gc;
+    protected ToggleGroup tg, rg, gt, gc, dg, vg, dtg;
     protected Label percentageLabel, paramsLabel;
     protected TextField percentageField, paramsField, headerField, footerField;
     protected KassaProperties kassaProperties = new KassaProperties();
@@ -36,7 +36,10 @@ public class SettingsPane extends GridPane {
         tg = new ToggleGroup();
         rg = new ToggleGroup();
         gt = new ToggleGroup();
-        gc = new ToggleGroup(); //create the RadioGroup
+        gc = new ToggleGroup();
+        dg = new ToggleGroup();
+        vg = new ToggleGroup();
+        dtg = new ToggleGroup(); //create the RadioGroup
 
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
@@ -72,16 +75,10 @@ public class SettingsPane extends GridPane {
         this.add(invoiceFooterLabel, 0, 9);
         headerField = new TextField();
         headerField.setDisable(true);
-        RadioButton dateTime = new RadioButton("DATE + TIME");
-        RadioButton totalPrice = new RadioButton("NON-DISCOUNTED PRICE");
-        RadioButton priceVAT = new RadioButton("SHOW VAT");
         footerField = new TextField();
         footerField.setDisable(true);
 
         this.add(headerField, 2, 7);
-        this.add(dateTime, 1, 8);
-        this.add(totalPrice, 1, 9);
-        this.add(priceVAT, 1, 10);
         this.add(footerField, 2, 11);
         enableMessageFields();
 
@@ -92,6 +89,11 @@ public class SettingsPane extends GridPane {
         //TODO send notification "saved"
         RadioButton loadSaveStrategy = (RadioButton)tg.getSelectedToggle();
         RadioButton discountStrategy = (RadioButton)rg.getSelectedToggle();
+        RadioButton headerText = (RadioButton)gt.getSelectedToggle();
+        RadioButton dateAndTime = (RadioButton)dtg.getSelectedToggle();
+        RadioButton detailsDiscount = (RadioButton)dg.getSelectedToggle();
+        RadioButton detailsVAT = (RadioButton)vg.getSelectedToggle();
+        RadioButton footerText = (RadioButton)gc.getSelectedToggle();
         if (loadSaveStrategy != null) {
             kassaProperties.setLoadSaveStrategy(loadSaveStrategy.getText().toUpperCase());
         }
@@ -101,13 +103,66 @@ public class SettingsPane extends GridPane {
                 kassaProperties.setDiscountParams(percentageField.getText() + "/" + paramsField.getText());
             }
         }
+        if(headerText != null){
+            if(headerText.getText().equals("NONE")){
+                kassaProperties.setNeedsHeaderText(false);
+            }
+            else{
+                kassaProperties.setNeedsHeaderText(true);
+                kassaProperties.setHeaderText(headerField.getText());
+            }
+        }else {
+            kassaProperties.setNeedsHeaderText(false);
+        }
+        if(dateAndTime != null){
+            if(dateAndTime.getText().equals("DATE + TIME")){
+                kassaProperties.setNeedsDateAndTime(true);
+            }else{
+                kassaProperties.setNeedsDateAndTime(false);
+            }
+        }else{
+            kassaProperties.setNeedsDateAndTime(false);
+        }
+        if(detailsDiscount != null){
+            if(detailsDiscount.getText().equals("DISCOUNT DETAILS")){
+                kassaProperties.setNeedsDiscountDetails(true);
+            }else{
+                kassaProperties.setNeedsDiscountDetails(false);
+            }
+        }else{
+            kassaProperties.setNeedsDiscountDetails(false);
+        }
+        if(detailsVAT != null){
+            if(detailsVAT.getText().equals("VAT DETAILS")){
+                kassaProperties.setNeedsVATDetails(true);
+            }else{
+                kassaProperties.setNeedsVATDetails(false);
+            }
+        }else{
+            kassaProperties.setNeedsVATDetails(false);
+        }
+        if(footerText != null){
+            if(footerText.getText().equals("NONE")){
+                kassaProperties.setNeedsFooterText(false);
+            }
+            else{
+                kassaProperties.setNeedsFooterText(true);
+                kassaProperties.setFooterText(footerField.getText());
+            }
+        }else {
+            kassaProperties.setNeedsFooterText(false);
+        }
         kassaProperties.setKassaProperties();
     }
     private void createRadioButtons(Shop shop){
         List<String> discountList = shop.getDiscountContext().getStrategyList();
         List<String> fileList = shop.getLoadSaveContext().getStrategyList();
         List<String> openingMessage = new ArrayList<>();
+        List<String> dateAndTime = new ArrayList<>();
+        List<String> detailsVAT = new ArrayList<>();
+        List<String> detailsDiscount = new ArrayList<>();
         List<String> closureMessage = new ArrayList<>();
+
 
 
         for (int i = 0; i < discountList.size(); i++){
@@ -126,6 +181,27 @@ public class SettingsPane extends GridPane {
             RadioButton rb = new RadioButton(openingMessage.get(i));
             rb.setToggleGroup(gt);
             this.add(rb, (i + 1)*2 - 1, 7);
+        }
+        dateAndTime.add("DATE + TIME");
+        dateAndTime.add("NO DATE + TIME");
+        for (int i = 0; i < dateAndTime.size(); i++){
+            RadioButton rb = new RadioButton(dateAndTime.get(i));
+            rb.setToggleGroup(dtg);
+            this.add(rb, i + 1, 8);
+        }
+        detailsDiscount.add("DISCOUNT DETAILS");
+        detailsDiscount.add("NO DISCOUNT DETAILS");
+        for (int i = 0; i < detailsDiscount.size(); i++){
+            RadioButton rb = new RadioButton(detailsDiscount.get(i));
+            rb.setToggleGroup(dg);
+            this.add(rb, i + 1, 9);
+        }
+        detailsVAT.add("VAT DETAILS");
+        detailsVAT.add("NO VAT DETAILS");
+        for (int i = 0; i < detailsVAT.size(); i++){
+            RadioButton rb = new RadioButton(detailsVAT.get(i));
+            rb.setToggleGroup(vg);
+            this.add(rb, i + 1, 10);
         }
         closureMessage.add("CLOSURE MESSAGE:");
         closureMessage.add("NONE");
