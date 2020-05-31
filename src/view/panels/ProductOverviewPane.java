@@ -19,7 +19,6 @@ public class ProductOverviewPane extends GridPane{
 	private TableView<Article> table;
 	protected Button restockButton;
 	protected Button refreshButton;
-
 	public ProductOverviewPane(Shop shop) {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);

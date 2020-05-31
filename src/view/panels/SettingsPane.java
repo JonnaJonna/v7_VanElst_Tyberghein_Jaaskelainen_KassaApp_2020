@@ -59,6 +59,8 @@ public class SettingsPane extends GridPane {
 
         Button saveButton = new Button("Save");
         saveButton.setOnAction(this::handleButtonAction);
+        Button resetButton = new Button("Reset settings");
+        resetButton.setOnAction(this::handleResetButtonAction);
 
         this.add(typeLabel, 0, 0);
         this.add(discountLabel, 0, 2);
@@ -74,7 +76,9 @@ public class SettingsPane extends GridPane {
         this.add(footerField, 2, 11);
         enableMessageFields();
 
+        this.add(resetButton, 3, 15);
         this.add(saveButton, 3, 15);
+        resetButton.setTranslateX(-50);
         saveButton.setTranslateX(75);
     }
     private void handleButtonAction(ActionEvent event) {
@@ -145,6 +149,34 @@ public class SettingsPane extends GridPane {
             kassaProperties.setNeedsFooterText(false);
         }
         kassaProperties.setKassaProperties();
+        clearAll();
+    }
+    private void handleResetButtonAction(ActionEvent event){
+        kassaProperties.setLoadSaveStrategy("TEXT");
+        kassaProperties.setDiscountStrategy("THRESHOLD");
+        kassaProperties.setDiscountParams("15.0/10.0");
+        kassaProperties.setNeedsHeaderText(true);
+        kassaProperties.setHeaderText("No header text has been entered yet");
+        kassaProperties.setNeedsDateAndTime(true);
+        kassaProperties.setNeedsDiscountDetails(true);
+        kassaProperties.setNeedsVATDetails(true);
+        kassaProperties.setNeedsFooterText(true);
+        kassaProperties.setFooterText("No footer text has been entered yet");
+        kassaProperties.setKassaProperties();
+        clearAll();
+    }
+    private void clearAll(){
+        tg.getSelectedToggle().setSelected(false);
+        rg.getSelectedToggle().setSelected(false);
+        percentageField.setText("");
+        paramsField.setText("");
+        gt.getSelectedToggle().setSelected(false);
+        headerField.setText("");
+        dtg.getSelectedToggle().setSelected(false);
+        dg.getSelectedToggle().setSelected(false);
+        vg.getSelectedToggle().setSelected(false);
+        gc.getSelectedToggle().setSelected(false);
+        footerField.setText("");
     }
     private void createRadioButtons(Shop shop){
         List<String> discountList = shop.getDiscountContext().getStrategyList();
