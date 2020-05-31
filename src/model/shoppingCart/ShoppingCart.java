@@ -111,6 +111,15 @@ public class ShoppingCart implements Observable {
         fireListeners();
     }
 
+    public void cancelCart(){
+        try{
+            state.cancel();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        fireListeners();
+    }
+
     private void fireListeners() {
         calculateDiscounts();
         for (ShoppingCartListener listener : cartListeners) {

@@ -118,7 +118,7 @@ public class ShoppingCartController {
         while(cart.getContents().size()>0){
             Article toRemove = cart.getContents().get(0);
             removeArticle(toRemove);
-        }
+        }cart.cancelCart();
         createNewCart();
         registerCartListeners();
     }
