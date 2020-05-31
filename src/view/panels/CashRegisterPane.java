@@ -142,6 +142,8 @@ public class CashRegisterPane extends GridPane {
                     }
                     else{
                         System.out.println("Hold is cancelled!");
+                        shoppingCartController.getCartFromHold();
+                        shoppingCartController.cancelCart();
                         holding = false;
                         holdActiveButtons();
                     }

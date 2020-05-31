@@ -82,7 +82,6 @@ public class SettingsPane extends GridPane {
         saveButton.setTranslateX(75);
     }
     private void handleButtonAction(ActionEvent event) {
-        //TODO send notification "saved"
         RadioButton loadSaveStrategy = (RadioButton)tg.getSelectedToggle();
         RadioButton discountStrategy = (RadioButton)rg.getSelectedToggle();
         RadioButton headerText = (RadioButton)gt.getSelectedToggle();
