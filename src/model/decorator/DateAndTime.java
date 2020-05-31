@@ -15,6 +15,6 @@ public class DateAndTime extends InvoiceDecorator{
     @Override
     public String getInvoice() {
         timestamp = LocalDateTime.now();
-        return "Date of sale: " + timestamp.getDayOfMonth() +  "/" + timestamp.getMonth() + "/" + timestamp.getYear() + "\nTime of sale: " + timestamp.getHour() + ":" + timestamp.getMinute() + ":" + timestamp.getSecond() + "\n" + invoice.getInvoice();
+        return "Date of sale: " + timestamp.getDayOfMonth() +  "/" + timestamp.getMonth().getValue() + "/" + timestamp.getYear() + "\nTime of sale: " + timestamp.getHour() + ":" + timestamp.getMinute() + ":" + timestamp.getSecond() + "\n" + invoice.getInvoice();
     }
 }
