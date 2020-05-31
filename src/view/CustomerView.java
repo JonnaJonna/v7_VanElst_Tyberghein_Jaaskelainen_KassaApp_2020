@@ -6,11 +6,11 @@ import javafx.stage.Stage;
 import model.Shop;
 import view.panels.CustomerPane;
 
-public class KlantView {
+public class CustomerView {
 
 	private Stage stage = new Stage();		
 		
-	public KlantView(Shop shop){
+	public CustomerView(Shop shop){
 		stage.setTitle("CASH DESK");
 		stage.setResizable(false);		
 		stage.setX(775);

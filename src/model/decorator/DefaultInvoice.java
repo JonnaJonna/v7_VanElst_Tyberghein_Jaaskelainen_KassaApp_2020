@@ -6,8 +6,6 @@ import model.Article;
 import model.KassaProperties;
 import model.shoppingCart.ShoppingCart;
 
-import java.util.ArrayList;
-
 /**
  * @author Wouter V.E.
  */
@@ -34,7 +32,6 @@ public class DefaultInvoice extends Invoice {
         Text = "Description        Amount   Price\n****************************\n" + itemString + "****************************\nAmount paid(including discount): €" + cart.getTotalAfterDiscount();
     }
 
-    //TODO finalizing a sale calls completeInvoice and prints the result to the console
         public Invoice completeInvoice(ShoppingCart cart){
         Invoice invoice = new DefaultInvoice(cart);
         if(properties.getNeedsHeaderText() && !(properties.getHeaderText().equals("This is header")||properties.getHeaderText().trim().equals(""))){

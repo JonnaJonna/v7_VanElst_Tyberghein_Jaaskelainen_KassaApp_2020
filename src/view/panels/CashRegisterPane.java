@@ -12,14 +12,12 @@ import javafx.util.Callback;
 import model.Article;
 import model.Shop;
 import model.decorator.DefaultInvoice;
-import model.decorator.Invoice;
-import view.KassaView;
 
 /**
  * @author Ruben T and Jonna J.
  */
 //tab1 of kassaview
-public class KassaPane extends GridPane {
+public class CashRegisterPane extends GridPane {
     private int soldCount = 0;
     protected boolean holding = false;
     protected Label bedrag, infoDiscount, discount, infoSaved, saved;
@@ -29,7 +27,7 @@ public class KassaPane extends GridPane {
     protected Button paymentButton;
     protected Button cancelButton;
 
-    public KassaPane(Shop shop, LogPane logPane) {
+    public CashRegisterPane(Shop shop, LogPane logPane) {
         ShoppingCartController shoppingCartController = shop.getShoppingCartController();
         this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);

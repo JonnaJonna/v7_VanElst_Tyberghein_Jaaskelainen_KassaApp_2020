@@ -7,18 +7,10 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import jxl.write.DateTime;
 import model.KassaProperties;
 import model.Shop;
-import model.discountStrategy.DiscountContext;
-import model.loadSaveStrategy.LoadSaveContext;
 
-import javax.xml.soap.Text;
-import java.lang.reflect.Array;
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**

@@ -5,11 +5,11 @@ import javafx.stage.Stage;
 import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.Shop;
-import view.KassaView;
-import view.KlantView;
+import view.CashRegisterView;
+import view.CustomerView;
 import model.KassaProperties;
 
-public class KassaAppMain extends Application {
+public class CashRegisterAppMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -17,8 +17,8 @@ public class KassaAppMain extends Application {
 		LoadSaveContext loadSaveContext = properties.getLoadSaveStrategyContext();	//application context
 		DiscountContext discountContext = properties.getDiscountStrategyContext();
 		Shop shop = new Shop(loadSaveContext, discountContext);
-		KassaView kassaView = new KassaView(shop);
-		KlantView klantView = new KlantView(shop);
+		CashRegisterView cashRegisterView = new CashRegisterView(shop);
+		CustomerView customerView = new CustomerView(shop);
 
 		System.out.print(discountContext.getStrategy());
 		System.out.println("\n");

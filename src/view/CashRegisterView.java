@@ -6,10 +6,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Shop;
 
-public class KassaView {
+public class CashRegisterView {
 	private Stage stage = new Stage();		
 		
-	public KassaView(Shop shop){
+	public CashRegisterView(Shop shop){
 		stage.setTitle("CASH DESK");
 		stage.setResizable(false);		
 		stage.setX(20);
@@ -17,7 +17,7 @@ public class KassaView {
 		Group root = new Group();
 		Scene scene = new Scene(root, 750, 500);
 
-		BorderPane borderPane = new KassaMainPane(shop);
+		BorderPane borderPane = new CashRegisterMainPane(shop);
 		borderPane.prefHeightProperty().bind(scene.heightProperty());
 		borderPane.prefWidthProperty().bind(scene.widthProperty());
 		root.getChildren().add(borderPane);
