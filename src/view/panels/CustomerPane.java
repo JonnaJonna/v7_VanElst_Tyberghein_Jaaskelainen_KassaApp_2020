@@ -49,7 +49,8 @@ public class CustomerPane extends GridPane {
         this.add(infoDiscount, 0, 4);
         this.add(discount, 1, 4);
 
-        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView, discount,
+        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, discount,
+                () -> cartView.setItems(shop.getShoppingCartController().getCartContentsCondensed()),
                 saved, shop.getDiscountContext());
         shop.getShoppingCartController().addObserver(observerPriceAndContents);
     }

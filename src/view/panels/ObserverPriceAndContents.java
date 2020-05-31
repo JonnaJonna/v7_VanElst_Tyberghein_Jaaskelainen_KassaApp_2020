@@ -1,13 +1,12 @@
 package view.panels;
 
 import controller.ShoppingCartObserver;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import model.Article;
 import model.discountStrategy.DiscountContext;
+import model.shoppingCart.ShoppingCart;
 
 import java.text.DecimalFormat;
+import java.util.function.Consumer;
 
 /**
  * @author Ruben T.
@@ -17,22 +16,23 @@ public class ObserverPriceAndContents implements ShoppingCartObserver {
     private Label prijsLabel;
     private Label discountPrice;
     private Label savedPrice;
-    private TableView tableView;
     private DiscountContext discount;
+    private Runnable contentsRefresher;
 
-    public ObserverPriceAndContents(Label prijsLabel, TableView tableView, Label discountPrice,
+    public ObserverPriceAndContents(Label prijsLabel, Label discountPrice,
+                                    Runnable contentsRefresher,
                                     Label savedPrice, DiscountContext discountContext) {
         this.prijsLabel = prijsLabel;
-        this.tableView = tableView;
         this.discountPrice = discountPrice;
         this.discount = discountContext;
         this.savedPrice = savedPrice;
+        this.contentsRefresher = contentsRefresher;
     }
 
     @Override
-    public void update(double totalPrice, ObservableList<Article> cart, double discountP) {
+    public void update(double totalPrice, ShoppingCart cart, double discountP) {
         prijsLabel.setText(dec.format(totalPrice) );
-//        tableView.setItems(cart);  //it's needed! -> don't comment
+        contentsRefresher.run();
         discountPrice.setText(dec.format(discountP));
         savedPrice.setText("- " + dec.format((totalPrice-discountP)));
     }

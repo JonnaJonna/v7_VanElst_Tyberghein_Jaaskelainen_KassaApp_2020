@@ -12,6 +12,7 @@ import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
 import model.states.State;
+
 import java.util.ArrayList;
 
 /**
@@ -126,8 +127,7 @@ public class ShoppingCartController {
     }
 
     public void createNewCart(){
-//        this.cart = new ShoppingCart(discountContext);
-        this.cart.clear();
+        this.cart = new ShoppingCart(discountContext);
     }
 
     public ShoppingCart getShoppingCart(){
@@ -148,7 +148,7 @@ public class ShoppingCartController {
                 @Override
                 public void cartChanged(ShoppingCart cart) {
                     System.out.println("Update");
-                    observer.update(cart.getTotalPrice(), getCartContents(), cart.getTotalAfterDiscount());
+                    observer.update(cart.getTotalPrice(), cart, cart.getTotalAfterDiscount());
                 }
             });
         }
@@ -159,7 +159,7 @@ public class ShoppingCartController {
                 @Override
                 public void cartChanged(ShoppingCart cart) {
                     System.out.println("Update");
-                    observer.update(cart.getTotalPrice(), getCartContents(), cart.getTotalAfterDiscount());
+                    observer.update(cart.getTotalPrice(), cart, cart.getTotalAfterDiscount());
                 }
             });
     }

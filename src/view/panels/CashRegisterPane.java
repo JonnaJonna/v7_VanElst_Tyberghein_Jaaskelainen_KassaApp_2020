@@ -77,8 +77,10 @@ public class CashRegisterPane extends GridPane {
         this.add(infoDiscount, 0, 4);
         this.add(discount, 1, 4);
 
-        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag, cartView,
-                discount, saved, shop.getDiscountContext());
+        ObserverPriceAndContents observerPriceAndContents = new ObserverPriceAndContents(bedrag,
+                discount,
+                () -> cartView.setItems(shoppingCartController.getCartContents()),
+                saved, shop.getDiscountContext());
         shoppingCartController.addObserver(observerPriceAndContents);
 
         //Scanning items

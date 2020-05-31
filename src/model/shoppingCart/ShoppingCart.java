@@ -1,16 +1,13 @@
 package model.shoppingCart;
 
-import controller.ShoppingCartController;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import model.Article;
-import model.database.ExcelLoadSaveStrategy;
 import model.discountStrategy.DiscountContext;
 import model.states.*;
-import view.panels.ProductOverviewPane;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -45,10 +42,6 @@ public class ShoppingCart implements Observable {
 
     public ShoppingCart(DiscountContext discountContext){
         this.discount = discountContext;
-        clear();
-    }
-
-    public void clear() {
         onHoldState = new OnHoldState(this);
         cancelledState = new CancelledState(this);
         activeState = new ActiveState(this);
