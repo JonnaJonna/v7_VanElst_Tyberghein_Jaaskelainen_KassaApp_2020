@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.util.Callback;
 import model.Article;
 import model.DomainException;
+import model.Shop;
 import model.discountStrategy.DiscountContext;
 import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
@@ -24,11 +25,13 @@ public class ShoppingCartController {
     private DiscountContext discountContext;
     private ShoppingCart cart;
     private ShoppingCart cartOnHold;
+    private Shop shop;
 
-    public ShoppingCartController(LoadSaveContext context, DiscountContext discount){
+    public ShoppingCartController(LoadSaveContext context, DiscountContext discount, Shop shop){
         this.context = context;
         this.discountContext = discount;
         this.cart = new ShoppingCart(discountContext);
+        this.shop = shop;
     }
 
     public ObservableList<Article> getCartContents(){
@@ -187,7 +190,7 @@ public class ShoppingCartController {
                 article.setStock(article.getStock()-1);
                 cart.addArticle(copy);
                 context.save(articles);
-                //TODO update product overview
+                shop.updateArticle(article);
                 return true;
             }
             else if(code == article.getArticleCode()){
@@ -207,7 +210,7 @@ public class ShoppingCartController {
                 a.setStock(a.getStock()+1);
                 cart.removeArticle(copy);
                 context.save(articles);
-                //TODO update product overview
+                shop.updateArticle(a);
                 return true;
             }
         }

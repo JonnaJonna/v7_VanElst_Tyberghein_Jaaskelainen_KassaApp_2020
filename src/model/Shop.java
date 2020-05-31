@@ -17,7 +17,7 @@ public class Shop {
     private ObservableList<Article> articles;
 
     public Shop(LoadSaveContext loadSaveContext, DiscountContext discountContext) {
-        shoppingCartController = new ShoppingCartController(loadSaveContext, discountContext);
+        shoppingCartController = new ShoppingCartController(loadSaveContext, discountContext, this);
         articles = loadSaveContext.load();
         this.discountContext = discountContext;
         this.loadSaveContext = loadSaveContext;
