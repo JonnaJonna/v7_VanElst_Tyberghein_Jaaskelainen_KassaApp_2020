@@ -3,6 +3,8 @@ package view.panels;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 
 /**
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 public class LogPane extends GridPane {
 
     protected Text logText = new Text("No sales have been made yet.");
+    private static DecimalFormat dec = new DecimalFormat("0.00");
 
     public LogPane(){
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -29,6 +32,6 @@ public class LogPane extends GridPane {
         String date = timestamp.getDayOfMonth() + "/" + timestamp.getMonth().toString() + "/" + timestamp.getYear();
         String time = timestamp.getHour() + ":" + timestamp.getMinute() + ":" + timestamp.getSecond();
 
-        logText.setText(logText.getText() + "\nSale made on " + date + " at " + time + ": \nTotal price of €" + totalprice +  " with discount of €" + (totalprice - discountedPrice) + " for finalised price of €" + discountedPrice + ".\n\n" );
+        logText.setText(logText.getText() + "\nSale made on " + date + " at " + time + ": \nTotal price of €" + totalprice +  " with discount of €" + dec.format(totalprice - discountedPrice) + " for finalised price of €" + discountedPrice + ".\n\n" );
     }
 }
