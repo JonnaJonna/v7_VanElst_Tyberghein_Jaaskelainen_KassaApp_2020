@@ -8,13 +8,13 @@ public abstract class State {
     private double price;
     private int articleCount;
 
-    public void placeOnHold(){};
+    public void placeOnHold(){}
 
-    public void activate(){};
+    public void activate(){}
 
-    public void cancel(){};
+    public void cancel(){}
 
-    public void finishSale(){};
+    public void finishSale(){}
 
     public State getState(){
         return this.getState();

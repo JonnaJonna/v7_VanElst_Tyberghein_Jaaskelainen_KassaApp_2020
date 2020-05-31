@@ -37,7 +37,7 @@ public class DefaultInvoice extends Invoice {
     //TODO finalizing a sale calls completeInvoice and prints the result to the console
         public Invoice completeInvoice(ShoppingCart cart){
         Invoice invoice = new DefaultInvoice(cart);
-        if(properties.getNeedsHeaderText()){
+        if(properties.getNeedsHeaderText() && !(properties.getHeaderText().equals("This is header")||properties.getHeaderText().trim().equals(""))){
             invoice = new GeneralHeaderText(invoice, properties);
         }
         if(properties.getNeedsDateAndTime()){
@@ -49,7 +49,7 @@ public class DefaultInvoice extends Invoice {
         if(properties.getNeedsVATDetails()){
             invoice = new VATDetails(invoice, cart);
         }
-        if(properties.getNeedsFooterText()){
+        if(properties.getNeedsFooterText() && !(properties.getFooterText().equals("This is footer") || properties.getFooterText().trim().equals(""))){
             invoice = new GeneralFooterText(invoice, properties);
         }
         return invoice;
