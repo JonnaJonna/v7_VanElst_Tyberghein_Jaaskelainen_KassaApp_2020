@@ -19,10 +19,6 @@ public class CashRegisterAppMain extends Application {
 		Shop shop = new Shop(loadSaveContext, discountContext);
 		CashRegisterView cashRegisterView = new CashRegisterView(shop);
 		CustomerView customerView = new CustomerView(shop);
-
-		System.out.print(discountContext.getStrategy());
-		System.out.println("\n");
-		System.out.println(discountContext.getPercentage() + " " + discountContext.getStrategy());
 	}
 	public static void main(String[] args) {
 		launch(args);

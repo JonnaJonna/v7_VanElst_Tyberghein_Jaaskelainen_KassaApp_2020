@@ -5,8 +5,6 @@ package model.states;
  */
 
 public abstract class State {
-    private double price;
-    private int articleCount;
 
     public void placeOnHold(){}
 

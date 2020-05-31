@@ -120,12 +120,6 @@ public class CashRegisterPane extends GridPane {
                 holdActiveButtons();
             }
         });
-        //TODO handle payments
-        /*
-        so when you make the payment you need to:
-        call method "completeInvoice" which requires the shoppingcart + 5 booleans (booleans pulled from properties, these are the things you mark in settings pane)
-        and then System.out.println the "getInvoice" method on that invoice you just mad
-         */
         paymentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -143,7 +137,7 @@ public class CashRegisterPane extends GridPane {
                 if(holding == true){
                     if(soldCount < 2){
                         soldCount++;
-                        System.out.println(soldCount);
+                        System.out.println("Current on hold cart has been on hold for " + soldCount + " sales.");
                         activateButton.setDisable(false);
                     }
                     else{

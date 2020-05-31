@@ -49,16 +49,7 @@ public class ShoppingCart implements Observable {
         state = activeState;
     }
 
-    //TODO, cashier needs all the items listed, only client needs to view the items listed once with updated stock
     public void addArticle(Article article) {
-        // Look if the article is already in the shopping cart
-        /*for (Article content : contents) {
-            if (content.getArticleCode() == article.getArticleCode()) {
-                content.setStock(content.getStock() + article.getStock());
-                fireListeners();
-                return;
-            }
-        } */
         contents.add(article);
         fireListeners();
     }
@@ -135,7 +126,6 @@ public class ShoppingCart implements Observable {
         dec.setDecimalSeparator('.');
         DecimalFormat decimal = new DecimalFormat("#.##", dec);
         String priceRounded = decimal.format(price);
-        System.out.println(priceRounded);
         return Double.parseDouble(priceRounded);
     }
 
@@ -147,7 +137,6 @@ public class ShoppingCart implements Observable {
         dec.setDecimalSeparator('.');
         DecimalFormat decimal = new DecimalFormat("#.##", dec);
         String discount = decimal.format(totalAfterDiscount);
-        System.out.println(discount);
         return Double.parseDouble(discount);
     }
 

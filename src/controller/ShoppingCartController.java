@@ -147,7 +147,6 @@ public class ShoppingCartController {
             cart.addListener(new ShoppingCartListener() {
                 @Override
                 public void cartChanged(ShoppingCart cart) {
-                    System.out.println("Update");
                     observer.update(cart.getTotalPrice(), cart, cart.getTotalAfterDiscount());
                 }
             });
@@ -158,7 +157,6 @@ public class ShoppingCartController {
             cart.addListener(new ShoppingCartListener() {
                 @Override
                 public void cartChanged(ShoppingCart cart) {
-                    System.out.println("Update");
                     observer.update(cart.getTotalPrice(), cart, cart.getTotalAfterDiscount());
                 }
             });
@@ -189,12 +187,11 @@ public class ShoppingCartController {
                 article.setStock(article.getStock()-1);
                 cart.addArticle(copy);
                 context.save(articles);
-                System.out.println(article.getStock());
                 //TODO update product overview
                 return true;
             }
             else if(code == article.getArticleCode()){
-                throw new DomainException("STOCK IS EMPTY!");
+                throw new DomainException("STOCK FOR THIS ITEM IS EMPTY!");
             }
         }
         return false;
@@ -210,7 +207,6 @@ public class ShoppingCartController {
                 a.setStock(a.getStock()+1);
                 cart.removeArticle(copy);
                 context.save(articles);
-                System.out.println(a.getStock());
                 //TODO update product overview
                 return true;
             }

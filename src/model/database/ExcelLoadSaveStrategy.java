@@ -46,7 +46,6 @@ public class ExcelLoadSaveStrategy implements LoadSaveStrategy {
                 article = new Article(Integer.parseInt(code.trim()),description,group,
                         Double.parseDouble(price.trim()),Integer.parseInt(stock.trim()));
                 articles.add(article);
-                //System.out.println(article);
             }
         } catch (BiffException e) {
             e.printStackTrace();
