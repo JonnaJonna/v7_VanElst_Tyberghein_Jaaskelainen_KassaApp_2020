@@ -126,7 +126,8 @@ public class ShoppingCartController {
     }
 
     public void createNewCart(){
-        this.cart = new ShoppingCart(discountContext);
+//        this.cart = new ShoppingCart(discountContext);
+        this.cart.clear();
     }
 
     public ShoppingCart getShoppingCart(){

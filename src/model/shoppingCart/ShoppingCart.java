@@ -45,6 +45,10 @@ public class ShoppingCart implements Observable {
 
     public ShoppingCart(DiscountContext discountContext){
         this.discount = discountContext;
+        clear();
+    }
+
+    public void clear() {
         onHoldState = new OnHoldState(this);
         cancelledState = new CancelledState(this);
         activeState = new ActiveState(this);
