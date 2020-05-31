@@ -129,12 +129,13 @@ public class KassaPane extends GridPane {
         paymentButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                //show the invoice
                 alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setHeaderText("Invoice");
                 DefaultInvoice invoice = new DefaultInvoice(shoppingCartController.getShoppingCart());
                 invoice.completeInvoice(shoppingCartController.getShoppingCart());
                 alert.setContentText(invoice.completeInvoice(shoppingCartController.getShoppingCart()).getInvoice());
                 alert.show();
-                //System.out.println();
 
                 logPane.addSaleToLog(shoppingCartController.getCartTotalPrice(),    //log sale
                         shoppingCartController.getCartPriceAfterDiscount());

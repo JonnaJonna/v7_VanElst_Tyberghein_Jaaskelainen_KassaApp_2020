@@ -12,11 +12,13 @@ import model.discountStrategy.DiscountContext;
 import model.states.*;
 import view.panels.ProductOverviewPane;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Ruben T
+ * @author Ruben T and Jonna J.
  */
 
 public class ShoppingCart implements Observable {
@@ -32,6 +34,7 @@ public class ShoppingCart implements Observable {
     private ObservableList<Article> cartOnHold;
     private DiscountContext discount;
     private double totalAfterDiscount = 0;
+    private DecimalFormatSymbols dec = DecimalFormatSymbols.getInstance();
 
     State onHoldState;
     State cancelledState;
@@ -123,7 +126,11 @@ public class ShoppingCart implements Observable {
         for (Article article : contents) {
             price += article.getPrice() * article.getStock();
         }
-        return price;
+        dec.setDecimalSeparator('.');
+        DecimalFormat decimal = new DecimalFormat("#.##", dec);
+        String priceRounded = decimal.format(price);
+        System.out.println(priceRounded);
+        return Double.parseDouble(priceRounded);
     }
 
     public ShoppingCart getShoppingCart(){
@@ -131,7 +138,11 @@ public class ShoppingCart implements Observable {
     }
 
     public double getTotalAfterDiscount(){
-        return totalAfterDiscount;
+        dec.setDecimalSeparator('.');
+        DecimalFormat decimal = new DecimalFormat("#.##", dec);
+        String discount = decimal.format(totalAfterDiscount);
+        System.out.println(discount);
+        return Double.parseDouble(discount);
     }
 
     public void calculateDiscounts(){

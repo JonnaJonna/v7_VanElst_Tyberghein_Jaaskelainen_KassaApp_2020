@@ -12,7 +12,6 @@ import model.loadSaveStrategy.LoadSaveContext;
 import model.shoppingCart.ShoppingCart;
 import model.shoppingCart.ShoppingCartListener;
 import model.states.State;
-
 import java.util.ArrayList;
 
 /**
@@ -20,7 +19,6 @@ import java.util.ArrayList;
  */
 public class ShoppingCartController {
     private ArrayList<ShoppingCartObserver> observers = new ArrayList<>();
-
     private LoadSaveContext context;
     private DiscountContext discountContext;
     private ShoppingCart cart;
