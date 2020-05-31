@@ -16,15 +16,8 @@ public class DefaultInvoice extends Invoice {
     private KassaProperties properties = new KassaProperties();
 
     public DefaultInvoice(ShoppingCart cart){
-        invoiceItems = FXCollections.observableArrayList(cart.getContents());
+        invoiceItems = cart.getContents();
 
-        for(Article a:cart.getContents()){
-            for(Article b:invoiceItems){
-                if(a.getArticleCode()==b.getArticleCode()){
-                    b.setStock(b.getStock() + 1);
-                }
-            }
-        }
         String itemString = new String();
         for(Article c:invoiceItems){
             itemString += c.getDescription() + "    " + c.getStock() + "   " + c.getPrice() + "\n";
